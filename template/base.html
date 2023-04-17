@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="light scroll-smooth" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Portal {% block title  %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Job Listing Landing Template" name="description">
+    <meta content="Job, CV, Career, Resume, Job Portal, Create Job, Post job, tailwind Css" name="keywords">
+    <meta name="author" content="Shreethemes">
+    <meta name="website" content="https://shreethemes.in/">
+    <meta name="email" content="support@shreethemes.in">
+    <meta name="version" content="1.0.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+
+    <!-- Css -->
+    <link href="{% static 'libs/tobii/css/tobii.min.css' %}" rel="stylesheet">
+    <link href="{% static 'libs/choices.js/public/assets/styles/choices.min.css' %}" rel="stylesheet">
+    <!-- Main Cs{% static 's -->
+    <link href="{% static 'libs/%40iconscout/unicons/css/line.css' %}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tailwind.min.css' %}">
+
+</head>
+<body class="dark:bg-slate-900">
+
+    <!-- Loader part -->
+    {% include 'partials/_loader.html' %}
+
+    <!-- Header part -->
+    {% include 'partials/_navbar.html' %}
+    
+    <!-- Body part -->
+    {% block content %}
+    
+    {% endblock %}
+        
+    <!-- Footer part -->
+    {% include 'partials/_footer.html' %}
+    
+    <!-- Switcher -->
+    {% include 'partials/_switcher.html' %}
+    
+    <!-- Back to Top part -->
+    {% include 'partials/_backtotop.html' %}
+
+    <!-- JAVASCRIPTS -->
+    <script src="{% static 'libs/tobii/js/tobii.min.js' %}"></script>
+    <script src="{% static 'libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+    <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+    <script src="{% static 'js/plugins.init.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <!-- JAVASCRIPTS -->    
+
+</body>
+</html>
