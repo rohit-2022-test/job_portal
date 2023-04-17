@@ -1,0 +1,66 @@
+{% load static %}
+
+<!-- Start Navbar -->
+<nav id="topnav" class="defaultscroll is-sticky">
+    <div class="container">
+        <!-- Logo container-->
+        <a class="logo" href="index.html">
+            <div class="block sm:hidden">
+                <img src="{% static 'images/logo-icon-40.png' %}" class="h-10 inline-block dark:hidden"  alt="">
+                <img src="{% static 'images/logo-icon-40-white.png' %}" class="h-10 hidden dark:inline-block"  alt="">
+            </div>
+            <div class="sm:block hidden">
+                <img src="{% static 'images/logo-dark.png' %}" class="h-[24px] inline-block dark:hidden" alt="">
+                <img src="{% static 'images/logo-white.png' %}" class="h-[24px] hidden dark:inline-block" alt="">
+            </div>
+        </a>
+        <!-- End Logo container-->
+
+        <!-- Start Mobile Toggle -->
+        <div class="menu-extras">
+            <div class="menu-item">
+                <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- End Mobile Toggle -->
+
+        <!--Login button Start-->
+        <ul class="buy-button list-none mb-0">
+            <li class="inline-block mb-0">
+                <div class="relative top-[3px]">
+                    <i class="uil uil-search text-lg absolute top-[3px] ltr:right-3 rtl:left-3"></i>
+                    <input type="text" class="form-input h-9 ltr:pr-10 rtl:pr-10 rounded-3xl sm:w-44 w-36 border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900" name="s" id="searchItem" placeholder="Search...">
+                </div>
+            </li>
+            <li class="inline-block pl-1 mb-0">
+                <a href="#" class="btn btn-icon rounded-full bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white"><img src="{% static 'images/team/05.jpg' %}" class="rounded-full" alt=""></a>
+            </li>
+        </ul>
+        <!--Login button End-->
+
+        <div id="navigation">
+            <!-- Navigation Menu-->
+            <ul class="navigation-menu justify-end">
+                <li>
+                    <a href="index.html" class="sub-menu-item">Home</a>
+                </li>
+                <li>
+                    <a href="index.html" class="sub-menu-item">Jobs</a>
+                </li>
+                <li>
+                    <a href="index.html" class="sub-menu-item">About Us</a>
+                </li>
+                <li>
+                    <a href="index.html" class="sub-menu-item">Contact</a>
+                </li>
+            </ul><!--end navigation menu-->
+        </div><!--end navigation-->
+    </div><!--end container-->
+</nav><!--end header-->
+<!-- End Navbar -->
