@@ -23,7 +23,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third Part App
     # Install App
-    'pages',
+    'account.apps.AccountConfig',
+    'candidate.apps.CandidateConfig',
+    'job.apps.JobConfig',
+    'pages.apps.PagesConfig',
+    'recruiter.apps.RecruiterConfig',
 ]
 
 MIDDLEWARE = [
@@ -60,11 +64,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'jobportal',
+        'USER': 'postgres',
+        'PASSWORD': 'shah 2000',
+        'HOST': 'localhost'
     }
 }
-
 
 # Password validation
 
