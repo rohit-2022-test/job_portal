@@ -3,42 +3,59 @@
 {% block content %}
 
 {% if 'signup' in request.path %}
-<section class="h-screen flex items-center justify-center relative overflow-hidden bg-[url('../../assets/images/hero/bg3.html')] bg-no-repeat bg-center bg-cover">
+<section class="flex items-center justify-center relative">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
     
     <div class="container">
         <div style="display: flex; justify-content: center;">
-            <div class="relative overflow-hidden bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="width: 40%">
+            <div class="relative bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="max-width:500px;">
                 <div class="p-6">
                     <a href="#">
-                        <img src="{% static 'assets/images/logo-dark.png' %}" class="mx-auto h-[24px] block dark:hidden" alt="">
-                        <img src="{% static 'assets/images/logo-light.png' %}" class="mx-auto h-[24px] dark:block hidden" alt="">
+                        <img src="{% static 'images/logo-dark.png' %}" class="mx-auto h-[24px] block dark:hidden" alt="">
+                        <img src="{% static 'images/logo-light.png' %}" class="mx-auto h-[24px] dark:block hidden" alt="">
                     </a>
                     <h5 class="my-6 text-xl font-semibold">Signup</h5>
-                    <form action="https://shreethemes.in/jobstack/layouts/signup-success.html" class="text-left">
+                    <form action="" method="post" class="text-left">
+                        {% csrf_token %}
                         <div class="grid grid-cols-1">
-                            <div class="mb-4 ltr:text-left rtl:text-right">
-                                <label class="font-semibold" for="RegisterName">Your Name:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-3 rounded-md" placeholder="Harry">
+                            <div class="mb-3 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">Username:</label>
+                                {{form.username}}
+                                {% if form.username.help_text %}
+                                    <small style="color: grey">{{ form.username.help_text }}</small><br>
+                                {% endif %}
+                                {% for error in form.username.errors %}
+                                    <small style="color: red">{{ error }}</small>
+                                {% endfor %}
                             </div>
 
-                            <div class="mb-4 ltr:text-left rtl:text-right">
+                            <div class="mb-3 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="LoginEmail">Email Address:</label>
-                                <input id="LoginEmail" type="email" class="form-input mt-3 rounded-md" placeholder="name@example.com">
+                                {{form.email}}
+                                {% for error in form.email.errors %}
+                                    <small style="color: red">{{ error }}</small>
+                                {% endfor %}
                             </div>
 
-                            <div class="mb-4 ltr:text-left rtl:text-right">
+                            <div class="mb-3 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="LoginPassword">Password:</label>
-                                <input id="LoginPassword" type="password" class="form-input mt-3 rounded-md" placeholder="Password:">
+                                {{form.password1}}
+                                <small style="color: grey">{{ form.password1.help_text }}</small>
+                                {% if form.password1.errors %}
+                                    <small style="color: red">{{  form.password1.errors|join:" "  }}</small>
+                                {% endif %}
                             </div>
 
-                            <div class="mb-4">
-                                <div class="flex items-center w-full mb-0">
-                                    <input class="form-checkbox text-emerald-600 rounded w-4 h-4 ltr:mr-2 rtl:ml-2 border border-inherit" type="checkbox" value="" id="AcceptT&C">
-                                    <label class="form-check-label text-slate-400" for="AcceptT&C">I Accept <a href="#" class="text-emerald-600">Terms And Condition</a></label>
-                                </div>
+                            <div class="mb-3 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="LoginPassword">Confirmation Password:</label>
+                                {{form.password2}}
+                                {% if form.password2.help_text %}
+                                    <small style="color: grey">{{ form.password2.help_text }}</small><br>
+                                {% endif %}
+                                {% for error in form.password2.errors %}
+                                    <small style="color: red">{{ error }}</small>
+                                {% endfor %}
                             </div>
-
                             <div class="mb-4">
                                 <input type="submit" class="btn bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md w-full" value="Register">
                             </div>
@@ -49,15 +66,14 @@
                         </div>
                     </form>
                 </div>
-                
-                <div class="px-6 py-2 bg-slate-50 dark:bg-slate-800 text-center">
-                    <p class="mb-0 text-gray-400 font-medium">© <script>document.write(new Date().getFullYear())</script> Jobstack. Designed by <a href="https://shreethemes.in/" target="_blank" class="text-reset">Shreethemes</a>.</p>
-                </div>
             </div>
         </div>
     </div>
 </section><!--end section -->
 {% endif %}
+
+<!-- Login section -->
+
 {% if 'login' in request.path %}
 <section class="h-screen flex items-center justify-center relative overflow-hidden bg-[url('../../assets/images/hero/bg3.html')] bg-no-repeat bg-center bg-cover">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
@@ -66,8 +82,8 @@
             <div class="relative overflow-hidden bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" >
                 <div class="p-6">
                     <a href="#">
-                        <img src="{% static 'assets/images/logo-dark.png' %}" class="mx-auto h-[24px] block dark:hidden" alt="">
-                        <img src="{% static 'assets/images/logo-light.png' %}" class="mx-auto h-[24px] dark:block hidden" alt="">
+                        <img src="{% static 'images/logo-dark.png' %}" class="mx-auto h-[24px] block dark:hidden" alt="">
+                        <img src="{% static 'images/logo-light.png' %}" class="mx-auto h-[24px] dark:block hidden" alt="">
                     </a>
                     <h5 class="my-6 text-xl font-semibold">Login</h5>
                     <form class="text-left">
@@ -118,8 +134,8 @@
             <div class="relative overflow-hidden bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="width: 35%">
                 <div class="p-6">
                     <a href="#">
-                        <img src="{% static 'assets/images/logo-dark.png' %}" class="mx-auto h-[24px] block dark:hidden" alt="">
-                        <img src="{% static 'assets/images/logo-light.png' %}" class="mx-auto h-[24px] dark:block hidden" alt="">
+                        <img src="{% static 'images/logo-dark.png' %}" class="mx-auto h-[24px] block dark:hidden" alt="">
+                        <img src="{% static 'images/logo-light.png' %}" class="mx-auto h-[24px] dark:block hidden" alt="">
                     </a>
                     <h5 class="my-6 text-xl font-semibold">Reset Your Password</h5>
                     <div class="grid grid-cols-1">
