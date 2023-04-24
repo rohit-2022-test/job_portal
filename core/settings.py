@@ -113,3 +113,11 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#Email
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'joshijaya.shivinfotech@gmail.com'
+EMAIL_HOST_PASSWORD = 'nrfpbvlzvhiocxgf'
+EMAIL_USE_TLS=True
