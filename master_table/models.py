@@ -65,3 +65,44 @@ class Location(models.Model):
     class Meta:
         db_table = "location"
         verbose_name_plural = "Locations"
+
+class UgCourse(Base):
+    unimportant_field = None
+    
+    def __str__(self):
+        return 'self.name'
+    
+    class Meta:
+        db_table = "ug_course"
+        verbose_name_plural = "Undergraduate Courses"
+
+class UgSubject(Base):
+    ug_course_id = models.ForeignKey(UgCourse, on_delete=models.CASCADE, blank=False, null=False)
+
+    def __str__(self):
+        return 'self.name'
+    
+    class Meta:
+        db_table = "ug_subject"
+        verbose_name_plural = "Undergraduate Subject"
+
+class PgCourse(Base):
+    unimportant_field = None
+    
+    def __str__(self):
+        return 'self.name'
+    
+    class Meta:
+        db_table = "pg_course"
+        verbose_name_plural = "Postgraduate Courses"
+
+class PgSubject(Base):
+    pg_course_id = models.ForeignKey(PgCourse, on_delete=models.CASCADE, blank=False, null=False)
+
+    def __str__(self):
+        return 'self.name'
+    
+    class Meta:
+        db_table = "pg_subject"
+        verbose_name_plural = "Postgraduate Subject"
+
