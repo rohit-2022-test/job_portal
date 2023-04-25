@@ -23,7 +23,7 @@
     <link href="{% static 'libs/%40iconscout/unicons/css/line.css' %}" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/icons.css' %}">
     <link rel="stylesheet" href="{% static 'css/tailwind.min.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body class="dark:bg-slate-900">
 
@@ -31,7 +31,7 @@
     {% include 'partials/_loader.html' %}
 
     <!-- Header part -->
-    {% if 'signup' not in request.path and 'login' not in request.path and 'reset-password' not in request.path %} 
+    {% if 'signup' not in request.path and 'login' not in request.path and 'password-reset' not in request.path and 'password_reset_done' not in request.path and 'password_reset_confirm' not in request.path and 'password_reset_complete' not in request.path and 'logout' not in request.path%} 
         {% include 'partials/_navbar.html' %}
     {% endif %}
     
@@ -41,7 +41,7 @@
     {% endblock %}
         
     <!-- Footer part -->
-    {% if 'signup' not in request.path and 'login' not in request.path and 'reset-password' not in request.path %} 
+    {% if 'signup' not in request.path and 'login' not in request.path and 'password-reset' not in request.path and 'password_reset_done' not in request.path and 'password_reset_confirm' not in request.path and 'password_reset_complete' not in request.path and 'logout' not in request.path%} 
         {% include 'partials/_footer.html' %}
     {% endif %}
     
@@ -49,7 +49,7 @@
     {% include 'partials/_switcher.html' %}
     
     <!-- Back to Top part -->
-    {% if 'signup'  not in request.path and 'login' not in request.path and 'reset-password' not in request.path %}
+    {% if 'signup'  not in request.path and 'login' not in request.path and 'password-reset' not in request.path and 'password_reset_done' not in request.path and 'password_reset_confirm' not in request.path and 'password_reset_complete' not in request.path and 'logout' not in request.path%}
         {% include 'partials/_backtotop.html' %}
     {% endif %}
 

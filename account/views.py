@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .form import SignupForm
 from django.contrib import messages
-from django.contrib.auth.views import PasswordChangeView,LoginView,PasswordResetView
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 
 auth_page = 'account/auth.html'
