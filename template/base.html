@@ -31,7 +31,9 @@
     {% include 'partials/_loader.html' %}
 
     <!-- Header part -->
-    {% include 'partials/_navbar.html' %}
+    {% if 'signup' not in request.path and 'login' not in request.path and 'reset-password' not in request.path %} 
+        {% include 'partials/_navbar.html' %}
+    {% endif %}
     
     <!-- Body part -->
     {% block content %}
@@ -39,13 +41,17 @@
     {% endblock %}
         
     <!-- Footer part -->
-    {% include 'partials/_footer.html' %}
+    {% if 'signup' not in request.path and 'login' not in request.path and 'reset-password' not in request.path %} 
+        {% include 'partials/_footer.html' %}
+    {% endif %}
     
     <!-- Switcher -->
     {% include 'partials/_switcher.html' %}
     
     <!-- Back to Top part -->
-    {% include 'partials/_backtotop.html' %}
+    {% if 'signup'  not in request.path and 'login' not in request.path and 'reset-password' not in request.path %}
+        {% include 'partials/_backtotop.html' %}
+    {% endif %}
 
     <!-- JAVASCRIPTS -->
     <script src="{% static 'libs/tobii/js/tobii.min.js' %}"></script>
