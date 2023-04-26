@@ -72,17 +72,19 @@
 <!-- Login section -->
 
 {% if 'login' in request.path %}
+
 <section class="h-screen flex items-center justify-center relative overflow-hidden bg-[url('../../assets/images/hero/bg3.html')] bg-no-repeat bg-center bg-cover">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
     <div class="container">
         <div style="display: flex; justify-content: center;">
-            <div class="relative overflow-hidden bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" >
+            <div class="relative overflow-hidden bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="width:400px;">
                 <div class="p-6">
                     <a href="#">
                         <img src="{% static 'images/logo-dark.png' %}" class="mx-auto h-[24px] block dark:hidden" alt="">
                         <img src="{% static 'images/logo-light.png' %}" class="mx-auto h-[24px] dark:block hidden" alt="">
                     </a>
                     <h5 class="my-6 text-xl font-semibold">Login</h5>
+                    {% include 'partials/_altertes.html' %}
                     <form action="" method="post" class="text-left">
                         {% csrf_token %}
                         <div class="grid grid-cols-1">
@@ -125,13 +127,13 @@
     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
     <div class="container">
         <div style="display: flex; justify-content: center;">
-            <div class="relative overflow-hidden bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="width: 35%">
+            <div class="relative overflow-hidden bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="max-width:400px;">
                 <div class="p-6">
                     <a href="#">
                         <img src="{% static 'images/logo-dark.png' %}" class="mx-auto h-[24px] block dark:hidden" alt="">
                         <img src="{% static 'images/logo-light.png' %}" class="mx-auto h-[24px] dark:block hidden" alt="">
                     </a>
-                    <h5 class="my-6 text-xl font-semibold">Reset Your Password</h5>
+                    <h5 class="my-6 text-xl font-semibold" style="text-align:center;">Reset Your Password</h5>
                     <div class="grid grid-cols-1">
                         <p class="text-slate-400 mb-6">Please enter your email address. You will receive a link to create a new password via email.</p>
                         <form class="text-left" method="post">
@@ -174,9 +176,9 @@
                     <div class="grid grid-cols-1">
                         <form class="text-left">
                             <div class="grid grid-cols-1">
-
+                                <p style="text-align:center;">Welcome</p>
                                 <div class="text-center">
-                                    <span class="text-slate-400 me-2">If you want Login? </span><a href="{% url 'login' %}" class="text-black dark:text-white font-bold">Sign in</a>
+                                    <span class="text-slate-400 me-2">Thanks for spending some quality time with the Web site today.</span><br><a href="{% url 'login' %}" class="text-black dark:text-white font-bold">Sign in Again</a>
                                 </div>
                             </div>
                         </form>
