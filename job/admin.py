@@ -8,7 +8,7 @@ class BaseAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         elif request.user.is_staff:
-            return qs.filter(user_id=request.user) 
+            return qs.filter(schedule_id__InterviewSchedule__scheduler_id=request.user) 
 
 
 class JobAdmin(BaseAdmin):
@@ -21,9 +21,9 @@ class JobAdmin(BaseAdmin):
 admin.site.register(Job, JobAdmin)
 
 class JobApplicantsAdmin(BaseAdmin):
-    list_display = ['id', 'user_id', 'job_id']
-    search_fields = ('user_id', 'job_id',)
-    list_filter = ('user_id', 'job_id',)
+    list_display = ['id', 'candidate_id', 'job_id']
+    search_fields = ('candidate_id', 'job_id',)
+    list_filter = ('candidate_id', 'job_id',)
     list_display_links = ('job_id',)
     list_per_page = 30
 
@@ -39,10 +39,10 @@ class InterviewScheduleAdmin(BaseAdmin):
 admin.site.register(InterviewSchedule, InterviewScheduleAdmin)
 
 class FeedbackAdmin(BaseAdmin):
-    list_display = ['id', 'user_id', 'schedule_id']
-    search_fields = ('user_id', 'schedule_id',)
-    list_filter = ('user_id', 'schedule_id',)
-    list_display_links = ('user_id', 'schedule_id',)
+    list_display = ['id', 'candidate_id', 'schedule_id']
+    search_fields = ('candidate_id', 'schedule_id',)
+    list_filter = ('candidate_id', 'schedule_id',)
+    list_display_links = ('candidate_id', 'schedule_id',)
     list_per_page = 30
 
 admin.site.register(Feedback, FeedbackAdmin)

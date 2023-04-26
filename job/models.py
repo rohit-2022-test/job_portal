@@ -51,7 +51,7 @@ class JobApplicants(Base):
     job_id = models.ForeignKey(Job, on_delete=models.CASCADE, blank=False, null=False)
 
     def __str__(self):
-        return f'{self.user_id.username}'
+        return f'{self.candidate_id.username}'
     
     class Meta:
         db_table = "job_applicants"
@@ -83,11 +83,11 @@ class Feedback(Base):
 
     def __str__(self):
         if self.status == 'selected':
-            return f'{self.user_id.username} (Selected)'
+            return f'{self.candidate_id.username} (Selected)'
         elif self.status == 'rejected':
-            return f'{self.user_id.username} (Rejected)'
+            return f'{self.candidate_id.username} (Rejected)'
         else:
-            return f'{self.user_id.username} (Pending)'
+            return f'{self.candidate_id.username} (Pending)'
 
     class Meta:
         db_table = "interview_feedback"
