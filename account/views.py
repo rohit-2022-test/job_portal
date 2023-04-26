@@ -7,7 +7,7 @@ from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmVie
 
 auth_page = 'account/auth.html'
 
-#Registration
+# Registration
 def signup(request):
     if request.method == "POST":
         form = SignupForm(request.POST)
@@ -30,12 +30,13 @@ class MyLoginView(LoginView):
         return reverse_lazy('index') 
     
     def form_invalid(self, form):
-        messages.error(self.request,'Invalid username or password')
+        messages.error(self.request,'Invalid credential')
         return self.render_to_response(self.get_context_data(form=form))
 
-# Password reset
+# Password Reset
 class PasswordReset(PasswordResetView):
     form_class = PasswordReset
 
+# Password Reset Confirm
 class PasswordConfirm(PasswordResetConfirmView):
     form_class = PasswordConfirm
