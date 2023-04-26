@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'job.apps.JobConfig',
     'pages.apps.PagesConfig',
     'recruiter.apps.RecruiterConfig',
+    'master_table.apps.MasterTableConfig',
+    'company.apps.CompanyConfig',
 ]
 
 MIDDLEWARE = [
@@ -110,6 +112,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'core/static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+# Media File (Images)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
