@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'job.apps.JobConfig',
     'pages.apps.PagesConfig',
     'recruiter.apps.RecruiterConfig',
+    'master_table.apps.MasterTableConfig',
 ]
 
 MIDDLEWARE = [
