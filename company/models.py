@@ -27,7 +27,7 @@ class Company(SoftDeleteModel):
         db_table = "company"
         verbose_name_plural = "Comapanies"
 
-class Comapany_images(models.Model):
+class ComapanyImages(models.Model):
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE, blank=False, null=False)
     image = models.ImageField(default='default_company_image.jpg', upload_to='comapany/comapany_image/%m', blank=True)
     created_at = models.DateField(blank=True, null=True, default=timezone.now)
