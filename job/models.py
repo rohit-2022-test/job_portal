@@ -10,10 +10,13 @@ from options import (
     Feedback_status
 )
 from company.models import Company
-from master_table.models import Location
+from master_table.models import (
+    Location,
+    Skill
+)
 
 class Base(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
+    candidate_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
     created_at = models.DateField(blank=True, null=True, default=timezone.now)
     updated_at = models.DateField(blank=True, null=True, default=timezone.now)
 
@@ -21,6 +24,8 @@ class Base(models.Model):
         abstract = True
 
 class Job(Base, SoftDeleteModel):
+    candidate_id = None
+    creater_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE, blank=False, null=False)
     job_title = models.CharField(max_length=255, blank=False, null=False)
     salary = models.CharField(max_length=20, blank=False, null=False)
@@ -32,6 +37,7 @@ class Job(Base, SoftDeleteModel):
     applicants_collection_mode = models.CharField(max_length=50, choices=Job_application_collection, default='email')
     applicants_collection_link_email = models.CharField(max_length=255, blank=False, null=False)
     applicants_limit = models.IntegerField(blank=False, null=False, default=15)
+    skill = models.ManyToManyField(Skill)
 
     def __str__(self):
         return f'{self.job_title}'
@@ -45,7 +51,7 @@ class JobApplicants(Base):
     job_id = models.ForeignKey(Job, on_delete=models.CASCADE, blank=False, null=False)
 
     def __str__(self):
-        return f'{self.user_id.username}'
+        return f'{self.candidate_id.username}'
     
     class Meta:
         db_table = "job_applicants"
@@ -70,18 +76,18 @@ class InterviewSchedule(Base):
         db_table = "interview_schedule"
         verbose_name_plural = "Interview Schedule"
 
-class feedback(Base):
+class Feedback(Base):
     schedule_id = models.ForeignKey(InterviewSchedule, on_delete=models.CASCADE, blank=False, null=False)
     description = models.TextField(blank=False)
     status = models.CharField(max_length=10, choices=Feedback_status, default='none')
 
     def __str__(self):
         if self.status == 'selected':
-            return f'{self.user_id.username} (Selected)'
+            return f'{self.candidate_id.username} (Selected)'
         elif self.status == 'rejected':
-            return f'{self.user_id.username} (Rejected)'
+            return f'{self.candidate_id.username} (Rejected)'
         else:
-            return f'{self.user_id.username} (Pending)'
+            return f'{self.candidate_id.username} (Pending)'
 
     class Meta:
         db_table = "interview_feedback"
