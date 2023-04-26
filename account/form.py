@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import (
     UserCreationForm,
+    PasswordResetForm,
+    SetPasswordForm
 )
 
 
@@ -20,3 +22,18 @@ class SignupForm(UserCreationForm):
             'email' : forms.EmailInput(attrs={'id':'LoginEmail', 'type':'email','class':'form-input mt-1 rounded-md', 'placeholder':'name@example.com','required':True}),     
         }
 
+class PasswordReset(PasswordResetForm):
+    email = forms.EmailField(
+        max_length=254,
+        widget=forms.EmailInput(attrs={'id':'LoginEmail', 'type':'email' ,'class':'form-input mt-3 rounded-md','placeholde':'name@example.com'}),
+    )
+
+class PasswordConfirm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password",'type':"password", 'name':"password", 'class':"form-input mt-3 rounded-md", 'placeholder':"Password:"}),
+        strip=False,
+    )
+    new_password2 = forms.CharField(
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password",'type':"password", 'name':"password", 'class':"form-input mt-3 rounded-md", 'placeholder':"Password:"}),
+    )

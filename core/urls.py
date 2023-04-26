@@ -12,4 +12,7 @@ urlpatterns = [
     # Account
     path('account/',include('account.urls')),
 
+    # Candidate
+    path('candidate/',include('candidate.urls')),
+
 ] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

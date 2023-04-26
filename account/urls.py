@@ -9,11 +9,11 @@ from django.contrib.auth.views import (PasswordResetView,
 urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/',views.MyLoginView.as_view(template_name='account/auth.html'),name='login'),
-    path('password-reset/', PasswordResetView.as_view(template_name='account/auth.html'),name='password-reset'),
+    path('password-reset/', views.PasswordReset.as_view(template_name='account/auth.html'),name='password-reset'),
     path('password-reset/done/', PasswordResetDoneView.as_view(template_name='account/password_reset_done.html'),
          name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', 
-         PasswordResetConfirmView.as_view(
+         views.PasswordConfirm.as_view(
             template_name='account/password_reset_confirm.html'),
         name='password_reset_confirm'),
     path('password-reset-complete/',
