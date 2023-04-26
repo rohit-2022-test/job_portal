@@ -12,3 +12,9 @@ def candidate_form(request):
         return render(request,'candidate/languege.html')
     if 'project' in request.path:
         return render(request,'candidate/project.html')
+    if 'education' in request.path:
+        return render(request,'candidate/education.html')
+    if 'experiance' in request.path:
+        return render(request,'candidate/experiance.html')
+    if 'cource' in request.path:
+        return render(request,'candidate/cource.html')
