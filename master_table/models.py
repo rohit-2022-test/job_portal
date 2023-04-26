@@ -25,7 +25,7 @@ class Designation(Base):
     unimportant_field = None
     
     def __str__(self):
-        return 'self.name'
+        return self.name
     
     class Meta:
         db_table = "designation"
@@ -35,7 +35,7 @@ class Language(Base):
     unimportant_field = None
     
     def __str__(self):
-        return 'self.name'
+        return self.name
     
     class Meta:
         db_table = "language"
@@ -45,7 +45,7 @@ class Skill(Base):
     description = models.TextField(blank=True, null=True)
     
     def __str__(self):
-        return 'self.name'
+        return self.name
     
     class Meta:
         db_table = "skill"
@@ -60,7 +60,7 @@ class Location(models.Model):
 
 
     def __str__(self):
-        return 'self.city'
+        return self.city
     
     class Meta:
         db_table = "location"
@@ -70,7 +70,7 @@ class UgCourse(Base):
     unimportant_field = None
     
     def __str__(self):
-        return 'self.name'
+        return self.name
     
     class Meta:
         db_table = "ug_course"
@@ -80,7 +80,7 @@ class UgSubject(Base):
     ug_course_id = models.ForeignKey(UgCourse, on_delete=models.CASCADE, blank=False, null=False)
 
     def __str__(self):
-        return 'self.name'
+        return self.name
     
     class Meta:
         db_table = "ug_subject"
@@ -90,7 +90,7 @@ class PgCourse(Base):
     unimportant_field = None
     
     def __str__(self):
-        return 'self.name'
+        return self.name
     
     class Meta:
         db_table = "pg_course"
@@ -100,7 +100,7 @@ class PgSubject(Base):
     pg_course_id = models.ForeignKey(PgCourse, on_delete=models.CASCADE, blank=False, null=False)
 
     def __str__(self):
-        return 'self.name'
+        return self.name
     
     class Meta:
         db_table = "pg_subject"
