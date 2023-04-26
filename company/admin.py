@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Company,Comapany_images
+from .models import Company,ComapanyImages
 
 # Register your models here.
 class CompanyImageInline(admin.TabularInline):
-    model = Comapany_images
+    model = ComapanyImages
 
 
 class CompanyAdmin(admin.ModelAdmin):
