@@ -27,6 +27,7 @@ class IndustryAdmin(admin.ModelAdmin):
     list_per_page = 30
     list_filter = ('is_display',)
     actions = [not_display]
+    ordering = ['id']
 
 @admin.register(Designation)
 class DesignationAdmin(admin.ModelAdmin):
@@ -34,6 +35,8 @@ class DesignationAdmin(admin.ModelAdmin):
     list_per_page = 30
     list_filter = ('is_display',)
     actions = [not_display]
+    ordering = ['id']
+
 
 @admin.register(Language)
 class LanguageAdmin(admin.ModelAdmin):
@@ -41,6 +44,8 @@ class LanguageAdmin(admin.ModelAdmin):
     list_per_page = 30
     list_filter = ('is_display',)
     actions = [not_display]
+    ordering = ['id']
+
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
@@ -48,6 +53,8 @@ class SkillAdmin(admin.ModelAdmin):
     list_per_page = 30
     list_filter = ('is_display',)
     actions = [not_display]
+    ordering = ['id']
+
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
@@ -55,6 +62,7 @@ class LocationAdmin(admin.ModelAdmin):
     list_per_page = 30
     list_filter = ('is_display', 'state')
     actions = [not_display]
+    ordering = ['id']
 
 @admin.register(UgCourse)
 class UgCourseAdmin(admin.ModelAdmin):
@@ -63,6 +71,7 @@ class UgCourseAdmin(admin.ModelAdmin):
     list_filter = ('is_display',)
     actions = [not_display]
     inlines = [UgSubjectInline]
+    ordering = ['id']
 
 @admin.register(PgCourse)
 class PgCourseAdmin(admin.ModelAdmin):
@@ -71,3 +80,4 @@ class PgCourseAdmin(admin.ModelAdmin):
     list_filter = ('is_display',)
     actions = [not_display]
     inlines = [PgSubjectInline]
+    ordering = ['id']
