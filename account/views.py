@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from .form import SignupForm
+from .form import SignupForm, PasswordReset, PasswordConfirm
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
 
 auth_page = 'account/auth.html'
 
@@ -21,7 +22,7 @@ def signup(request):
     }
     return render(request, auth_page, context)
 
-#Login
+# Login
 class MyLoginView(LoginView):
     redirect_authenticated_user = True
     
@@ -31,3 +32,10 @@ class MyLoginView(LoginView):
     def form_invalid(self, form):
         messages.error(self.request,'Invalid username or password')
         return self.render_to_response(self.get_context_data(form=form))
+
+# Password reset
+class PasswordReset(PasswordResetView):
+    form_class = PasswordReset
+
+class PasswordConfirm(PasswordResetConfirmView):
+    form_class = PasswordConfirm
