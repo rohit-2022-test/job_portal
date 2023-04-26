@@ -1,4 +1,8 @@
 # Compiled Python bytecode
 *.py[cod]
-
+*.log
+*.pot
+*.pyc
+__pycache__/
 venv
+.env
