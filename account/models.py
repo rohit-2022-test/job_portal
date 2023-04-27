@@ -9,7 +9,7 @@ from PIL import Image
 
 class UserDetail(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE, blank=False, null=False)
-    profile_img = models.ImageField(default='default_profile.jpg', upload_to='profile/profile_img/%m', blank=True)
+    profile_img = models.ImageField(default='default_profile.png', upload_to='profile/profile_img/%m', blank=True)
     bg_img = models.ImageField(default='default_bg.jpg', upload_to='profile/profile_img/%m', blank=True)
     resume = models.FileField(upload_to='resume', blank=True)
     date_of_birth = models.DateField(blank=True, null=True, default=timezone.now)
@@ -24,15 +24,15 @@ class UserDetail(models.Model):
     updated_at = models.DateField(blank=True, null=True, default=timezone.now)
     
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return f'{self.user_id.username} Profile'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        img = Image.open(self.image.path)
+        img = Image.open(self.profile_img.path)
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             img.thumbnail(output_size)
-            img.save(self.image.path)
+            img.save(self.profile_img.path)
     
     class Meta:
         db_table = "user_detail"

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from month.models import MonthField
 from django.utils import timezone
 from master_table.models import (
     Language,
@@ -14,12 +15,12 @@ from options import (
 
 class Base(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
-    start_date = models.DateField(blank=True, null=True, default=timezone.now)
-    end_date = models.DateField(blank=True, null=True, default=timezone.now)
+    start_date = MonthField(blank=True, null=True, default=timezone.now)
+    end_date = MonthField(blank=True, null=True, default=timezone.now)
     description = models.TextField(blank=True)
     created_at = models.DateField(blank=True, null=True, default=timezone.now)
     updated_at = models.DateField(blank=True, null=True, default=timezone.now)
-    currently_working = models.BooleanField(default=True, blank=False, null=False)
+    currently_working = models.BooleanField(default=True, blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -47,7 +48,6 @@ class UserSkill(Base):
     updated_at = None
     currently_working = None
     skill_id = models.ForeignKey(Skill, on_delete=models.CASCADE, blank=False, null=False)
-    skill_rate = models.IntegerField(default=1, blank=False, null=False)
 
     def __str__(self):
         return f'{self.skill_id.name}'
@@ -88,9 +88,6 @@ class UserEducation(Base):
         verbose_name_plural = "User Education"
 
 class UserCourse(Base):
-    start_date = None
-    end_date = None
-    currently_working = None
     course_name = models.CharField(max_length=255, blank=False, null=False)
     associate = models.CharField(max_length=255, blank=True, null=True)
 
@@ -102,10 +99,9 @@ class UserCourse(Base):
         verbose_name_plural = "User Course"
 
 class UserProject(Base):
-    experiance_id = models.ForeignKey(UserExperience, on_delete=models.CASCADE, blank=False, null=False)
     project_name = models.CharField(max_length=255, blank=False, null=False)
     associate = models.CharField(max_length=255, blank=True, null=True)
-    project_url = models.CharField(max_length=255, blank=False, null=False)
+    project_url = models.CharField(max_length=255, blank=True, null=True)
     workplace_type = models.CharField(max_length=50, choices=Experience_workplace_type, default='on-site')
     role = models.CharField(max_length=100, blank=False, null=False)
     role_description = models.TextField(blank=True)

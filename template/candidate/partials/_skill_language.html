@@ -1,0 +1,30 @@
+{% if skill_language %}
+{% for key, value in skill_language.items %}
+<h4 class="mt-6 text-xl font-semibold">
+    {% if key == "skill" %}
+        Skills
+    {% else %}
+        Language 
+    {% endif %}
+     : <a href="#"><i class="uil uil-file-edit-alt"  style="display:inline-block; float:right; "></i></a></h4>
+    {% if value %}
+        {% for i in value %}
+            <div class="grid lg:grid-cols-3 grid-cols-3 mt-6">
+                <div class="ltr:ml-4 rtl:mr-4">
+                    <div class="flex justify-between ">
+                        <h6 class="text-lg font-medium mb-0">
+                            {% if key == "skill" %}
+                                {{i.skill_id.name}}
+                            {% else %}
+                                {{ i.language_id.name }}
+                                <span class="text-slate-600">({{i.proficiency}})</span><br>
+                            {% endif %}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+{% endif %}
+
