@@ -6,7 +6,7 @@ from master_table.models import (
     Skill,
     Location,
 )
-from .options import (
+from options import (
     language_proficiency,
     Experience_job_type,
     Experience_workplace_type
