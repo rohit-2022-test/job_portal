@@ -18,3 +18,19 @@ Experience_workplace_type = (
     ('hybrid','hybrid'),
     ('remote','remote'),
 )
+
+Job_application_collection = (
+    ('email','email'),
+    ('external-website','external-website'),
+)
+
+Schedule_interview_mode = (
+    ('online','online'),
+    ('ofline','ofline'),
+)
+
+Feedback_status = (
+    ('selected','selected'),
+    ('rejected','rejected'),
+    ('none','none'),
+)
