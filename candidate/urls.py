@@ -6,6 +6,7 @@ urlpatterns = [
     path('profile/', views.candidate_detail, name='candidate_detail'),
     path('experiance/', views.candidate_form, name='experiance'),
     path('languege/', views.candidate_form, name='language'),
+    path('skill/', views.candidate_form, name='skill'),
     path('cource/', views.candidate_form, name='cource'),
     path('education/', views.candidate_form, name='education'),
     path('project/', views.candidate_form, name='project'),

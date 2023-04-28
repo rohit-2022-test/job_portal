@@ -9,21 +9,33 @@
             <div class="relative  bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="width:350px">
                 <div class="p-6">
                     <h5 class="text-xl font-semibold">Cource</h5>
-                    <form action="https://shreethemes.in/jobstack/layouts/signup-success.html" class="text-left">
+                    <form action="{% url 'cource' %}" method="post" class="text-left">
+                        {% csrf_token %}
                         <div class="grid grid-cols-1">
                             <div class="mb-4 ltr:text-left rtl:text-right mt-3">
-                                <label class="font-semibold" for="RegisterName">Name:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" placeholder="Languege">
+                                <label class="font-semibold" for="RegisterName">Cource Name:</label>
+                                <input id="RegisterName" type="text" name="cource_name" class="form-input mt-1 rounded-md">
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">Start Data:</label>
+                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="start_data" placeholder="">
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">End Data:</label>
+                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="end_data" placeholder="">
+                            </div>
+
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Description:</label>
-                                <input type="text" class="form-input mt-1 rounded-md">
+                                <input type="text" name="description" class="form-input mt-1 rounded-md">
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Associate:</label>
-                                <input type="text" class="form-input mt-1 rounded-md">
+                                <input type="text" name="associate" class="form-input mt-1 rounded-md">
                             </div>
 
                             <div class="mb-7">

@@ -16,6 +16,9 @@ def candidate_form(request):
     if 'languege' in request.path:
         return render(request,'candidate/forms/languege_form.html')
     
+    if 'skill' in request.path:
+        return render(request,'candidate/forms/skill_form.html')
+    
     if 'project' in request.path:
         return render(request,'candidate/forms/project_form.html')
     
@@ -59,6 +62,17 @@ def candidate_form(request):
         return render(request,'candidate/forms/experiance_form.html',context)
     
     if 'cource' in request.path:
+        if request.method == 'POST':
+            cource_name = request.POST.get('cource_name') 
+            associate = request.POST.get('associate')
+            start_data = request.POST.get('start_data')
+            end_data = request.POST.get('end_data')
+            description = request.POST.get('description')
+
+            UserCourse.objects.create(user_id=request.user,course_name=cource_name,associate=associate,
+                                      start_date=start_data,end_date=end_data,description=description)
+            return redirect('candidate_detail')
+        
         return render(request,'candidate/forms/cource_form.html')
     
     
