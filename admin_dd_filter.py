@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 from django.db.models import Q
+from master_table.models import Location
 
 # Filter 
 # User Filter
@@ -27,20 +28,38 @@ class RoleListFilter(admin.SimpleListFilter):
 
 
 # Company Filter
-def query_data():
+def query_user_data():
     user_data = User.objects.filter(Q(is_superuser = True) | Q(is_staff = True)).exclude(last_name__contains="Super Admin").values_list('username', 'id')
     return user_data
 
-class RecruiterListFilter(admin.SimpleListFilter):
-    title = _("recruiter filter")
-    parameter_name = "recruiter"
+class CreatedByFilter(admin.SimpleListFilter):
+    title = _("created by filter")
+    parameter_name = "created by"
 
     def lookups(self, request, model_admin):
-        dropdown_options = [(key[0], _(key[0])) for key in query_data()]
+        dropdown_options = [(key[0], _(key[0])) for key in query_user_data()]
         return dropdown_options
 
     def queryset(self, request, queryset):
-        for qd in query_data():
+        for qd in query_user_data():
             if self.value() == qd[0]:
                 return queryset.filter(user_id=qd[1])
+
+
+def query_state_data():
+    location_data = Location.objects.all().distinct().values_list('state')
+    return location_data
+
+class LocationFilter(admin.SimpleListFilter):
+    title = _("state filter")
+    parameter_name = "state"
+
+    def lookups(self, request, model_admin):
+        dropdown_options = [(key[0], _(key[0])) for key in query_state_data()]
+        return dropdown_options
+
+    def queryset(self, request, queryset):
+        for qd in query_state_data():
+            if self.value() == qd[0]:
+                return queryset.filter(location_id__state=qd[0])
             

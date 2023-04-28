@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Company,ComapanyImages
-from admin_dd_filter import RecruiterListFilter
+from admin_dd_filter import CreatedByFilter, LocationFilter
+from django.utils.html import format_html
 
 # Company Image Models
 class CompanyImageInline(admin.TabularInline):
@@ -9,26 +10,28 @@ class CompanyImageInline(admin.TabularInline):
     ]
     model = ComapanyImages
 
-# Check Super Admin
-def is_superadmin_check(data):
-    request_user = data.user.last_name
-    super_admin = "Super Admin"
-
-    if super_admin in request_user:
-        return False
-    else:
-        return True
-
 # Company Models
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user_id', 'name', 'email', 'phone_no']
+    list_display = ['id', 'user_id', 'compane_name', 'email', 'phone_no', "location"]
     search_fields = ('name',)
-    list_filter = (RecruiterListFilter,)
-    list_display_links = ('name',)
+    list_display_links = ('compane_name',)
     list_per_page = 30
     inlines = [CompanyImageInline]
-
     readonly_fields = ["user_id","created_at","updated_at","deleted_at"]
+
+    # Location
+    def location(self, obj):
+        company_location = Company.objects.filter(name=obj)
+        for location in company_location:
+            result = location.location_id
+        return format_html("<b>{}({})</b>", result.city,(result.state))
+
+    # Update Filter
+    def get_list_filter(self, request):
+        if request.user.is_superuser:
+            return (CreatedByFilter,"created_at", LocationFilter)
+        else:
+            return ("created_at", LocationFilter)
 
     # Update Queryset
     def get_queryset(self, request):
@@ -50,12 +53,30 @@ class CompanyAdmin(admin.ModelAdmin):
 
     # Data edit Permission
     def has_add_permission(self, request, obj=None):
-        is_superadmin_check(request)
+        request_user = request.user.last_name
+        super_admin = "Super Admin"
+
+        if super_admin in request_user:
+            return False
+        else:
+            return True
 
     def has_change_permission(self, request, obj=None):
-        is_superadmin_check(request)
+        request_user = request.user.last_name
+        super_admin = "Super Admin"
+
+        if super_admin in request_user:
+            return False
+        else:
+            return True
         
     def has_delete_permission(self, request, obj=None):
-        is_superadmin_check(request)
+        request_user = request.user.last_name
+        super_admin = "Super Admin"
+
+        if super_admin in request_user:
+            return False
+        else:
+            return True
 
 admin.site.register(Company, CompanyAdmin)

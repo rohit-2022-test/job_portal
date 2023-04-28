@@ -2,14 +2,21 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import User, Group
 from admin_dd_filter import RoleListFilter
+from django.utils.html import format_html
 
 # User Model
 admin.site.unregister(User)
 class UserDataAdmin(UserAdmin):
-    readonly_fields = [
-        "date_joined",
-        "last_login",
-    ]
+    list_display = ("username", "email", "first_name", "last_name", "role", "is_active")
+    list_editable = ("is_active",)
+    list_per_page = 30
+    
+    # Role
+    def role(self, obj):
+        user_role = User.objects.filter(username=obj)
+        for role in user_role:
+            result = "Admin" if role.is_superuser else "Recruiter" if role.is_staff else "Candidate"
+        return format_html("<b>{}</b>", result)
 
     # Update Filter
     def get_list_filter(self, request):
@@ -24,6 +31,13 @@ class UserDataAdmin(UserAdmin):
             return ("username", "first_name", "last_name", "email")
         else:
             return []
+
+    # Update Read Only Field
+    def get_readonly_fields(self, request, obj=None):
+        if request.user.is_superuser:
+            return ("date_joined","last_login")
+        else:
+            return ("groups","user_permissions","date_joined","last_login")
 
     # Update Queryset
     def get_queryset(self, request):
@@ -41,6 +55,11 @@ class UserDataAdmin(UserAdmin):
     # Disable Form Field
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
+        # Change Field Name
+        if "add" not in request.path:
+            form.base_fields["is_superuser"].label = "admin"
+            form.base_fields["is_staff"].label = "recruiter"
+
         is_superuser = request.user.is_superuser
         disabled_fields = set()
 
