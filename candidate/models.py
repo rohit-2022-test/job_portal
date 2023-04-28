@@ -60,7 +60,6 @@ class UserExperience(Base):
     company_name = models.CharField(max_length=255, blank=False, null=False)
     job_title = models.CharField(max_length=255, blank=False, null=False)
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE, blank=False, null=False)
-    skill_rate = models.IntegerField(default=1, blank=False, null=False)
     job_type = models.CharField(max_length=100, choices=Experience_job_type, default='frelance')
     workplace_type = models.CharField(max_length=50, choices=Experience_workplace_type, default='on-site')
 

@@ -9,63 +9,71 @@
         <div style="display: flex; justify-content: center;" class="mt-20">
             <div class="relative  bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="width: 430px">
                 <div class="p-6">
+                    {% include 'partials/_altertes.html' %}
                     <h5 class="text-xl font-semibold">Experience</h5>
-                    <form action="https://shreethemes.in/jobstack/layouts/signup-success.html" class="text-left">
+                    <form action="{% url 'experiance' %}" method="post" class="text-left">
+                        {% csrf_token %}
                         <div class="grid grid-cols-1">
                             <div class="mb-4 ltr:text-left rtl:text-right mt-3">
                                 <label class="font-semibold" for="RegisterName">Company name:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" placeholder="Languege">
+                                {{ form.company_name }}
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Job Title:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" placeholder="Languege">
+                                {{ form.job_title }}
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="LoginEmail">Job type:</label>
-                                <select id="LoginEmail" name="LoginEmail" class="form-input mt-1 rounded-md form-select fa-caret-down">
-                                    <option value="full-time">full-time</option>
-                                    <option value="part-time">part-time</option>
-                                    <option value="self-employed">self-employed</option>
-                                    <option value="frelance">frelance</option>
-                                    <option value="internship">internship</option>
-                                    <option value="contract">contract</option>
-                                </select>
+                                {{ form.job_type }}
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
-                                <label class="font-semibold" for="RegisterName">Location:</label>
-                                <input type="int" class="form-input mt-1 rounded-md" placeholder="Location">
+                                <label class="font-semibold" for="RegisterName">State:</label>
+                                {{ form.state }}
+                                <datalist id="states" name="data_location">
+                                    {% for i in states %}
+                                        <option value="{{i}}"></option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">City:</label>
+                                {{ form.city }}
+                                {% for error in form.city.errors %}
+                                    <small style="color: red">{{ error }}</small>
+                                {% endfor %}
+                                <datalist id="cities" name="data_location">
+                                    {% for i in cities %}
+                                        <option value="{{i}}"></option>
+                                    {% endfor %}
+                                </datalist>
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="LoginEmail">Workplace type:</label>
-                                <select id="LoginEmail" name="LoginEmail" class="form-input mt-1 rounded-md form-select fa-caret-down">
-                                    <option value="on-site">on-site</option>
-                                    <option value="hybrid">hybrid</option>
-                                    <option value="remote">remote</option>
-                                </select>
+                                {{ form.workplace_type }}
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Start Data:</label>
-                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" placeholder="Languege">
+                                {{form.start_date}}
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">End Data:</label>
-                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" placeholder="Languege">
+                                {{form.end_date}}
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
-                                <input type="checkbox" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> Currently working</label><br>
+                                {{form.currently_working }} Currently working
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Description:</label>
-                                <input type="text" class="form-input mt-1 rounded-md">
+                                {{form.description}}
                             </div>
 
                             <div class="mb-7">
