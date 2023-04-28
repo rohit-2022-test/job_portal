@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import User, Group
+from admin_dd_filter import RoleListFilter
 
 # User Model
 admin.site.unregister(User)
@@ -9,7 +10,21 @@ class UserDataAdmin(UserAdmin):
         "date_joined",
         "last_login",
     ]
-    
+
+    # Update Filter
+    def get_list_filter(self, request):
+        if request.user.is_superuser:
+            return (RoleListFilter, "groups")
+        else:
+            return []
+
+    # Update Search
+    def get_search_fields(self, request):
+        if request.user.is_superuser:
+            return ("username", "first_name", "last_name", "email")
+        else:
+            return []
+
     # Update Queryset
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
