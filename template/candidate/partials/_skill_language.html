@@ -15,17 +15,17 @@
      "><i class="uil uil-file-edit-alt"  style="display:inline-block; float:right;"></i></a></h4>
     {% if value %}
         {% for i in value %}
-            <div class="grid lg:grid-cols-3 grid-cols-3 mt-6">
+            <div class="grid lg:grid-cols-3 grid-cols-3 mt-3">
                 <div class="ltr:ml-4 rtl:mr-4">
                     <div class="flex justify-between ">
                         <h6 class="text-lg font-medium mb-0">
                             {% if key == "skill" %}
-                                {{i.skill_id.name}}
+                                {{i.skill_id.name}} <a href="{% url 'skill' %}"><span></span><i class="uil uil-file-edit-alt"  style="display:inline-block; float:right; "></i></a>
                             {% else %}
-                                {{ i.language_id.name }}
-                                <span class="text-slate-600">({{i.proficiency}})</span><br>
+                              <span> {{ i.language_id.name }}  <a href="{% url 'update_language' i.id %}"><i class="uil uil-file-edit-alt"  style="display:inline-block; float:right; "></i></a>
+                                <p class="text-slate-400">({{i.proficiency}})</p></span>   
                             {% endif %}
-                        </h4>
+                        </h6>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from account.models import UserDetail
-from master_table.models import Location
+from master_table.models import Language, Location, Skill
 from .models import (
     UserCourse,
     UserEducation,
@@ -9,18 +9,56 @@ from .models import (
     UserProject,
     UserSkill
 )
-from .form import UserExperienceForm
+from .form import (
+    UserExperienceForm,
+    UserProjectForm,
+)
 # Create your views here.
 
-def candidate_form(request):
-    if 'languege' in request.path:
+def candidate_create_form(request):
+
+    if 'language' in request.path:
+
+        if request.method == 'POST':
+            language_name = request.POST.get('language_name')
+            proficiency = request.POST.get('proficiency')
+
+            language = Language.objects.create(name=language_name)
+            
+            UserLanguage.objects.create(user_id=request.user,language_id=language,proficiency=proficiency)
+    
+            return redirect('candidate_detail')
+            
         return render(request,'candidate/forms/languege_form.html')
     
     if 'skill' in request.path:
+        if request.method == 'POST':
+            skill_name = request.POST.get('skill_name')
+ 
+            skill = Skill.objects.create(name=skill_name)
+
+            UserSkill.objects.create(user_id=request.user,skill_id=skill) 
+
+            return redirect('candidate_detail')
+        
         return render(request,'candidate/forms/skill_form.html')
     
     if 'project' in request.path:
-        return render(request,'candidate/forms/project_form.html')
+        form = UserProjectForm()
+        if request.method == 'POST':
+            form = UserProjectForm(request.POST)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.user_id = request.user
+                obj.save()
+                form.save()
+                return redirect('candidate_detail')
+            
+        context = {
+            'form' : form,
+        }
+
+        return render(request,'candidate/forms/project_form.html',context)
     
     if 'education' in request.path:
         if request.method == 'POST':
@@ -28,8 +66,8 @@ def candidate_form(request):
             course = request.POST.get('course')
             grade = request.POST.get('grade')
             subject = request.POST.get('subject')
-            start_data = request.POST.get('start_data')
-            end_data = request.POST.get('end_data')
+            start_data = request.POST.get('start_date')
+            end_data = request.POST.get('end_date')
             activity = request.POST.get('activity')
             description = request.POST.get('description')
 
@@ -65,16 +103,141 @@ def candidate_form(request):
         if request.method == 'POST':
             cource_name = request.POST.get('cource_name') 
             associate = request.POST.get('associate')
-            start_data = request.POST.get('start_data')
-            end_data = request.POST.get('end_data')
+            currently_working = bool(request.POST.get('currently_working'))
+            start_data = request.POST.get('start_date')
+            end_data = request.POST.get('end_date')
             description = request.POST.get('description')
 
             UserCourse.objects.create(user_id=request.user,course_name=cource_name,associate=associate,
-                                      start_date=start_data,end_date=end_data,description=description)
+                                      currently_working=currently_working,start_date=start_data,end_date=end_data,
+                                      description=description)
             return redirect('candidate_detail')
         
         return render(request,'candidate/forms/cource_form.html')
+
+def candidate_update_form(request,id):
+    if 'update_education' in request.path:
+        if request.method == 'POST':
+            institute_name = request.POST.get('institute_name')
+            course = request.POST.get('course')
+            grade = request.POST.get('grade')
+            subject = request.POST.get('subject')
+            start_date = request.POST.get('start_date')
+            end_date = request.POST.get('end_date')
+            activity = request.POST.get('activity')
+            description = request.POST.get('description')
+
+            UserEducation.objects.filter(id=id).update(institute_name=institute_name,course=course,grade=grade,
+                                                       subject=subject,start_date=start_date,end_date=end_date,
+                                                       activities=activity,description=description)
+            return redirect('candidate_detail')
+
+        update_education = UserEducation.objects.filter(id=id)
+        context = {
+            'update_education' : update_education
+        }
+        return render(request,'candidate/update_form/education_form.html',context)
+
+    if 'update_experience' in request.path:
+        if request.method == 'POST':
+            company_name = request.POST.get('company_name')
+            job_title = request.POST.get('job_title')
+            job_type = request.POST.get('job_type')
+            city = request.POST.get('city')
+            workplace_type = request.POST.get('workplace_type')
+            currently_working = bool(request.POST.get('currently_working'))
+            start_date = request.POST.get('start_date')
+            end_date = request.POST.get('end_date')
+            description = request.POST.get('description')
+
+            city_state = Location.objects.get(city=city)
+            
+            UserExperience.objects.filter(id=id).update(company_name=company_name,job_title=job_title,
+                                                        job_type=job_type,location_id=city_state,
+                                                        start_date=start_date,workplace_type=workplace_type,
+                                                        currently_working=currently_working,description=description,
+                                                        end_date=end_date)
+            return redirect('candidate_detail')
+
+        cities = Location.objects.all().values_list('city',flat=True)
+        states = Location.objects.all().values_list('state',flat=True)
+        update_experience = UserExperience.objects.filter(id=id)
+        context = {
+            'update_experience' : update_experience,
+            'cities' : cities,
+            'states' : states
+        }
+        return render(request,'candidate/update_form/experience_form.html',context)
     
+    if 'update_project' in request.path:
+        if request.method == 'POST':
+            project_name = request.POST.get('project_name')
+            associate = request.POST.get('associate')
+            project_url = request.POST.get('project_url')
+            role = request.POST.get('role')
+            role_description = request.POST.get('role_description')
+            project_name = request.POST.get('project_name')
+            workplace_type = request.POST.get('workplace_type')
+            currently_working = bool(request.POST.get('currently_working'))
+            start_date = request.POST.get('start_date')
+            end_date = request.POST.get('end_date')
+            description = request.POST.get('description')
+
+            UserProject.objects.filter(id=id).update(project_name=project_name,associate=associate,
+                                                    project_url=project_url,role=role,role_description=role_description,
+                                                    start_date=start_date,workplace_type=workplace_type,
+                                                    currently_working=currently_working,description=description,
+                                                    end_date=end_date)
+
+            return redirect('candidate_detail')
+
+        update_project = UserProject.objects.filter(id=id)
+        context = {
+            'update_project' : update_project
+        }
+        return render(request,'candidate/update_form/project_form.html',context)
+    
+    if 'update_cource' in request.path:
+        if request.method == 'POST':
+            course_name = request.POST.get('course_name')
+            associate = request.POST.get('associate')
+            currently_working = bool(request.POST.get('currently_working'))
+            start_date = request.POST.get('start_date')
+            end_date = request.POST.get('end_date')
+            description = request.POST.get('description')
+
+            UserCourse.objects.filter(id=id).update(course_name=course_name,associate=associate,
+                                                    currently_working=currently_working,
+                                                    start_date=start_date,description=description,
+                                                    end_date=end_date)
+
+            return redirect('candidate_detail')
+
+        update_cource = UserCourse.objects.filter(id=id)
+        context = {
+            'update_cource' : update_cource
+        }
+        return render(request,'candidate/update_form/cource_form.html',context)
+    
+    if 'language' in request.path:
+        if request.method == 'POST':
+            name = request.POST.get('language_name')
+            proficiency = request.POST.get('proficiency')
+
+            language = Language.objects.get(name=name)
+            
+            UserLanguage.objects.filter(id=id).update(user_id=request.user,
+                                                      language_id=language,
+                                                      proficiency=proficiency)
+    
+            return redirect('candidate_detail')
+        
+    update_language = UserLanguage.objects.filter(id=id)
+    context = {
+        'update_language' : update_language
+    }
+    
+    return render(request,'candidate/update_form/language_form.html',context)
     
 def candidate_detail(request):
     
