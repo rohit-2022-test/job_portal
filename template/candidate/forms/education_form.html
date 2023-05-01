@@ -9,43 +9,43 @@
             
             <div class="relative  bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="width: 430px">
                 <div class="p-6">
-                    <h5 class="text-xl font-semibold">Education</h5>    
+                    <h5 class="text-xl font-semibold">Education</h5>  
                     <form action="{% url 'education' %}" method="post" class="text-left">
                         {% csrf_token %}
                         <div class="grid grid-cols-1">
                             <div class="mb-4 ltr:text-left rtl:text-right mt-3">
                                 <label class="font-semibold" for="RegisterName">Institute name:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="institute_name" placeholder="{{i.institute_name}}">
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="institute_name" placeholder="{{i.institute_name}}" required>
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Course:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="course" placeholder="{{i.course}}">
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="course" placeholder="{{i.course}}" required>
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Grade:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="grade" placeholder="{{i.grade}}">
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="grade" placeholder="{{i.grade}}" required>
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Subject:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="subject" placeholder="{{i.subject}}">
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="subject" placeholder="{{i.subject}}" required>
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Start Data:</label>
-                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="start_date" placeholder="{{i.start_date}}">
+                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="start_date" placeholder="{{i.start_date}}" required>
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">End Data:</label>
-                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="end_date" placeholder="{{i.end_date}}">
+                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="end_date" placeholder="{{i.end_date}}" required>
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Activity:</label>
-                                <input type="text" class="form-input mt-1 rounded-md" name="activity"  placeholder="{{i.activities}}">
+                                <input type="text" class="form-input mt-1 rounded-md" name="activity"  placeholder="{{i.activities}}" required>
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
