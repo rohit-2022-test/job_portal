@@ -6,49 +6,51 @@
     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
     <div class="container">
         <div style="display: flex; justify-content: center;" class="mt-20">
+            
             <div class="relative  bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="width: 430px">
                 <div class="p-6">
-                    <h5 class="text-xl font-semibold">Education</h5>
-                    <form action="https://shreethemes.in/jobstack/layouts/signup-success.html" class="text-left">
+                    <h5 class="text-xl font-semibold">Education</h5>    
+                    <form action="{% url 'education' %}" method="post" class="text-left">
+                        {% csrf_token %}
                         <div class="grid grid-cols-1">
                             <div class="mb-4 ltr:text-left rtl:text-right mt-3">
                                 <label class="font-semibold" for="RegisterName">Institute name:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" placeholder="Languege">
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="institute_name" placeholder="{{i.institute_name}}">
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Course:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" placeholder="Languege">
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="course" placeholder="{{i.course}}">
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Grade:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" placeholder="Languege">
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="grade" placeholder="{{i.grade}}">
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Subject:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" placeholder="Languege">
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="subject" placeholder="{{i.subject}}">
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Start Data:</label>
-                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" placeholder="Languege">
+                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="start_date" placeholder="{{i.start_date}}">
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">End Data:</label>
-                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" placeholder="Languege">
+                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="end_date" placeholder="{{i.end_date}}">
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Activity:</label>
-                                <input type="text" class="form-input mt-1 rounded-md">
+                                <input type="text" class="form-input mt-1 rounded-md" name="activity"  placeholder="{{i.activities}}">
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Description:</label>
-                                <input type="text" class="form-input mt-1 rounded-md">
+                                <input type="text" class="form-input mt-1 rounded-md" name="description"  placeholder="{{i.description}}">
                             </div>
 
                             <div class="mb-7">
@@ -63,3 +65,7 @@
 </section><!--end section -->
 
 {% endblock %}
+    
+
+
+

@@ -43,10 +43,10 @@
                 <a class="btn btn-icon rounded-full bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white">
                     <img src="{% static 'images/team/05.jpg' %}" class="rounded-full" alt="">
                 </a>
-                    <div class="card">
+                    <div class="card ">
                         
                         {% if user.is_authenticated %} 
-                        <a href="{% url 'candidate_detail' request.user.id %}">My Profile</a><br>
+                        <a href="{% url 'candidate_detail' %}">My Profile</a><br>
                         <a href="{% url 'logout' %}">Log Out</a><br>
                         {% else %}
                         <a href="{% url 'signup' %}" class="mb-2">Sign Up</a><br>
