@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import User, Group
 from admin_dd_filter import RoleListFilter
 from django.utils.html import format_html
+from .models import UserDetail
 
 # User Model
 admin.site.unregister(User)
@@ -21,7 +22,7 @@ class UserDataAdmin(UserAdmin):
     # Update Filter
     def get_list_filter(self, request):
         if request.user.is_superuser:
-            return (RoleListFilter, "groups")
+            return (RoleListFilter, "groups", "is_active")
         else:
             return []
 
@@ -79,10 +80,44 @@ class UserDataAdmin(UserAdmin):
 
 admin.site.register(User, UserDataAdmin)
 
+# Candidate Detail
+class UserDetailAdmin(admin.ModelAdmin):
+    list_display = ("candidate_name", "phone_no", "location", "industry", "active_candidate")
+    # list_editable = ("is_active",)
+    list_per_page = 30
+
+    # Active Candidate
+    def active_candidate(self, obj):
+        active_candidate = User.objects.filter(username=obj, is_staff=False, is_superuser=False)
+        for role in active_candidate:
+            result = format_html("<b style=\"color:MediumSeaGreen;\">Active</b>") if role.is_active else format_html("<b style=\"color:Tomato;\">Inactive</b>")
+        return result
+
+    # Location
+    def location(self, obj):
+        instance = User.objects.get(username=obj)
+        candidate_location = UserDetail.objects.filter(user_id=instance)
+        for location in candidate_location:
+            result = location.location_id
+        return format_html("<b>{}({})</b>", result.city,(result.state))
+
+    # Update Permission
+    def has_change_permission(self, request, obj=None):
+        return False
+    
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+admin.site.register(UserDetail, UserDetailAdmin)
+
 # Group Model
 admin.site.unregister(Group)
 class GroupDataAdmin(GroupAdmin):
 
+    # Update Permission
     def has_add_permission(self, request, obj=None):
         request_user = request.user.last_name
         super_admin = "Super Admin"
