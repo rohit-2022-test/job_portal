@@ -10,7 +10,7 @@ from django.core.validators import FileExtensionValidator
 
 class UserDetail(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE, blank=False, null=False)
-    profile_img = models.ImageField(default='default_profile.jpg', upload_to='profile/profile_img/%m', blank=True)
+    profile_img = models.ImageField(default='default_profile.png', upload_to='profile/profile_img/%m', blank=True)
     bg_img = models.ImageField(default='default_bg.jpg', upload_to='profile/profile_img/%m', blank=True)
     resume = models.FileField(upload_to='resume', blank=True, validators=[FileExtensionValidator( ['pdf', 'docx'])])
     date_of_birth = models.DateField(blank=True, null=True, default=timezone.now)
@@ -29,6 +29,7 @@ class UserDetail(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+        img = Image.open(self.profile_img.path)
         img = Image.open(self.profile_img.path)
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
