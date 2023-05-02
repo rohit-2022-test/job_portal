@@ -17,18 +17,17 @@
                         <div class="grid grid-cols-1">
                             <div class="mb-4 ltr:text-left rtl:text-right mt-3">
                                 <label class="font-semibold" for="RegisterName">Company name:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="company_name" placeholder="{{i.company_name}}" value="{{i.company_name}}">
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="company_name" placeholder="{{i.company_name}}" value="{{i.company_name}}" required>
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Job Title:</label>
-                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="job_title" placeholder="{{i.job_title}}" value="{{i.job_title}}">
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="job_title" placeholder="{{i.job_title}}" value="{{i.job_title}}" required>
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="LoginEmail">Job type:</label>
-                                <!-- <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="institute_name" placeholder="{{i.job_type}}"> -->
-                                <select id="LoginEmail" name="job_type" class="form-input mt-3 rounded-md form-select fa-caret-down" value="{{i.job_type}}" placeholder="{{i.job_type}}">
+                                <select id="LoginEmail" name="job_type" class="form-input mt-3 rounded-md form-select fa-caret-down" value="{{i.job_type}}" placeholder="{{i.job_type}}" required>
                                     <option value="full-time">full-time</option>
                                     <option value="part-time">part-time</option>
                                     <option value="self-employed">self-employed</option>
@@ -40,7 +39,7 @@
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">State:</label>
-                                <input id="RegisterName" list="states" type="text" class="form-input mt-1 rounded-md" name="state" placeholder="{{i.location_id.state}}" value="{{i.location_id.state}}">
+                                <input id="RegisterName" list="states" type="text" class="form-input mt-1 rounded-md" name="state" placeholder="{{i.location_id.state}}" value="{{i.location_id.state}}" required>
                                 <datalist id="states" name="data_location">
                                     {% for i in states %}
                                         <option value="{{i}}"></option>
@@ -50,7 +49,7 @@
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">City:</label>
-                                <input id="RegisterName" list="cities" type="text" class="form-input mt-1 rounded-md" name="city" placeholder="{{i.location_id.city}}" value="{{i.location_id.city}}">
+                                <input id="RegisterName" list="cities" type="text" class="form-input mt-1 rounded-md" name="city" placeholder="{{i.location_id.city}}" value="{{i.location_id.city}}" required>
                                 {% for error in form.city.errors %}
                                     <small style="color: red">{{ error }}</small>
                                 {% endfor %}
@@ -72,7 +71,7 @@
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
                                 <label class="font-semibold" for="RegisterName">Start Data:</label>
-                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="start_date" placeholder="{{i.start_date}}" value="{{i.start_date}}">
+                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="start_date" placeholder="{{i.start_date}}" value="{{i.start_date}}" required>
                             </div>
 
                             <div class="mb-4 ltr:text-left rtl:text-right">
