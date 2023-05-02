@@ -8,10 +8,16 @@ from .models import UserDetail
 # User Model
 admin.site.unregister(User)
 class UserDataAdmin(UserAdmin):
-    list_display = ("username", "email", "first_name", "last_name", "role", "is_active")
-    list_editable = ("is_active",)
+    list_display = ("username", "email", "first_name", "last_name", "role", "active_candidate")
     list_per_page = 30
     
+    # Active Candidate
+    def active_candidate(self, obj):
+        active_candidate = User.objects.filter(username=obj)
+        for role in active_candidate:
+            result = format_html("<b style=\"color:MediumSeaGreen;\">Active</b>") if role.is_active else format_html("<b style=\"color:Tomato;\">Inactive</b>")
+        return result
+
     # Role
     def role(self, obj):
         user_role = User.objects.filter(username=obj)
@@ -80,10 +86,13 @@ class UserDataAdmin(UserAdmin):
 
 admin.site.register(User, UserDataAdmin)
 
+'''
+Remove the candidate detail from admin panel
+'''
+
 # Candidate Detail
 class UserDetailAdmin(admin.ModelAdmin):
     list_display = ("candidate_name", "phone_no", "location", "industry", "active_candidate")
-    # list_editable = ("is_active",)
     list_per_page = 30
 
     # Active Candidate
