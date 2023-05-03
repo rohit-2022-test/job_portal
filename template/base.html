@@ -19,11 +19,11 @@
     <!-- Css -->
     <link href="{% static 'libs/tobii/css/tobii.min.css' %}" rel="stylesheet">
     <link href="{% static 'libs/choices.js/public/assets/styles/choices.min.css' %}" rel="stylesheet">
-    <!-- Main Cs{% static 's -->
-    <link href="{% static 'libs/%40iconscout/unicons/css/line.css' %}" type="text/html" rel="stylesheet">
+    <!-- Main Css -->
+    <link href="{% static 'libs/%40iconscout/unicons/css/line.css' %}" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/icons.css' %}">
     <link rel="stylesheet" href="{% static 'css/tailwind.min.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body class="dark:bg-slate-900">
 
@@ -31,7 +31,9 @@
     {% include 'partials/_loader.html' %}
 
     <!-- Header part -->
-    {% include 'partials/_navbar.html' %}
+    {% if 'signup' not in request.path and 'login' not in request.path and 'password-reset' not in request.path and 'password_reset_done' not in request.path and 'password_reset_confirm' not in request.path and 'password_reset_complete' not in request.path and 'logout' not in request.path%} 
+        {% include 'partials/_navbar.html' %}
+    {% endif %}
     
     <!-- Body part -->
     {% block content %}
@@ -39,13 +41,17 @@
     {% endblock %}
         
     <!-- Footer part -->
-    {% include 'partials/_footer.html' %}
+    {% if 'signup' not in request.path and 'login' not in request.path and 'password-reset' not in request.path and 'password_reset_done' not in request.path and 'password_reset_confirm' not in request.path and 'password_reset_complete' not in request.path and 'logout' not in request.path%} 
+        {% include 'partials/_footer.html' %}
+    {% endif %}
     
     <!-- Switcher -->
     {% include 'partials/_switcher.html' %}
     
     <!-- Back to Top part -->
-    {% include 'partials/_backtotop.html' %}
+    {% if 'signup'  not in request.path and 'login' not in request.path and 'password-reset' not in request.path and 'password_reset_done' not in request.path and 'password_reset_confirm' not in request.path and 'password_reset_complete' not in request.path and 'logout' not in request.path%}
+        {% include 'partials/_backtotop.html' %}
+    {% endif %}
 
     <!-- JAVASCRIPTS -->
     <script src="{% static 'libs/tobii/js/tobii.min.js' %}"></script>

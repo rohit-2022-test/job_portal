@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<section class="flex items-center justify-center relative  bg-[url('../../assets/images/hero/bg3.html')] bg-no-repeat bg-center bg-cover">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
+    <div class="container">
+        <div style="display: flex; justify-content: center;" class="mt-20">
+            <div class="relative  bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="width: 430px">
+                <div class="p-6">
+                    <h5 class="text-xl font-semibold">Experience</h5>
+                    {% if update_experience %} 
+                    {% for i in update_experience %}
+                    <form action="{% url 'update_experience' i.id %}" method="post" class="text-left">
+                        {% csrf_token %}
+                        <div class="grid grid-cols-1">
+                            <div class="mb-4 ltr:text-left rtl:text-right mt-3">
+                                <label class="font-semibold" for="RegisterName">Company name:</label>
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="company_name" placeholder="{{i.company_name}}" value="{{i.company_name}}">
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">Job Title:</label>
+                                <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="job_title" placeholder="{{i.job_title}}" value="{{i.job_title}}">
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="LoginEmail">Job type:</label>
+                                <!-- <input id="RegisterName" type="text" class="form-input mt-1 rounded-md" name="institute_name" placeholder="{{i.job_type}}"> -->
+                                <select id="LoginEmail" name="job_type" class="form-input mt-3 rounded-md form-select fa-caret-down" value="{{i.job_type}}" placeholder="{{i.job_type}}">
+                                    <option value="full-time">full-time</option>
+                                    <option value="part-time">part-time</option>
+                                    <option value="self-employed">self-employed</option>
+                                    <option value="frelance">frelance</option>
+                                    <option value="internship">internship</option>
+                                    <option value="contract">contract</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">State:</label>
+                                <input id="RegisterName" list="states" type="text" class="form-input mt-1 rounded-md" name="state" placeholder="{{i.location_id.state}}" value="{{i.location_id.state}}">
+                                <datalist id="states" name="data_location">
+                                    {% for i in states %}
+                                        <option value="{{i}}"></option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">City:</label>
+                                <input id="RegisterName" list="cities" type="text" class="form-input mt-1 rounded-md" name="city" placeholder="{{i.location_id.city}}" value="{{i.location_id.city}}">
+                                {% for error in form.city.errors %}
+                                    <small style="color: red">{{ error }}</small>
+                                {% endfor %}
+                                <datalist id="cities" name="data_location">
+                                    {% for i in cities %}
+                                        <option value="{{i}}"></option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="LoginEmail">Workplace type:</label>
+                                <select id="LoginEmail" name="workplace_type" class="form-input mt-3 rounded-md form-select fa-caret-down">
+                                    <option value="on-site">on-site</option>
+                                    <option value="hybrid">hybrid</option>
+                                    <option value="remote">remote</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">Start Data:</label>
+                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="start_date" placeholder="{{i.start_date}}" value="{{i.start_date}}">
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">End Data:</label>
+                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="end_date" placeholder="{{i.end_date}}" value="{{i.end_date}}">
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <input type="checkbox" name="currently_working" value="{{i.currently_working}}" {% if i.currently_working %}checked{% endif %} placeholder="{{i.currently_working}}">
+                                <label for="vehicle1"> Currently working</label><br>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">Description:</label>
+                                <input type="text" class="form-input mt-3 rounded-md" name="description" placeholder="{{i.description}}" value="{{i.description}}">
+                            </div>
+
+                            <div class="mb-7">
+                                <input type="submit" class="btn bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md w-full" value="Submit">
+                            </div>
+                        </div>
+                    </form>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--end section -->
+
+{% endblock %}
