@@ -4,6 +4,15 @@ from django.contrib.auth.models import User, Group
 from admin_dd_filter import RoleListFilter
 from django.utils.html import format_html
 from .models import UserDetail
+from .candidate_inline import (
+    CandidateDetailInline,
+    UserEducationInline,
+    UserCourseInline,
+    UserExperienceInline,
+    UserSkillInline,
+    UserProjectInline,
+    UserLanguageInline
+)
 
 # User Model
 admin.site.unregister(User)
@@ -11,6 +20,22 @@ class UserDataAdmin(UserAdmin):
     list_display = ("username", "email", "first_name", "last_name", "role", "active_candidate")
     list_per_page = 30
     
+    # Merge of Fields
+    def get_inlines(self, request, obj=None):
+        candidate = User.objects.filter(username=obj, is_staff=False, is_superuser=False)
+        if candidate:
+            return [
+                CandidateDetailInline,
+                UserEducationInline,
+                UserCourseInline,
+                UserExperienceInline,
+                UserSkillInline,
+                UserProjectInline,
+                UserLanguageInline
+            ]
+        else:
+            return []
+
     # Active Candidate
     def active_candidate(self, obj):
         active_candidate = User.objects.filter(username=obj)
@@ -85,42 +110,6 @@ class UserDataAdmin(UserAdmin):
         return form
 
 admin.site.register(User, UserDataAdmin)
-
-'''
-Remove the candidate detail from admin panel
-'''
-
-# Candidate Detail
-class UserDetailAdmin(admin.ModelAdmin):
-    list_display = ("candidate_name", "phone_no", "location", "industry", "active_candidate")
-    list_per_page = 30
-
-    # Active Candidate
-    def active_candidate(self, obj):
-        active_candidate = User.objects.filter(username=obj, is_staff=False, is_superuser=False)
-        for role in active_candidate:
-            result = format_html("<b style=\"color:MediumSeaGreen;\">Active</b>") if role.is_active else format_html("<b style=\"color:Tomato;\">Inactive</b>")
-        return result
-
-    # Location
-    def location(self, obj):
-        instance = User.objects.get(username=obj)
-        candidate_location = UserDetail.objects.filter(user_id=instance)
-        for location in candidate_location:
-            result = location.location_id
-        return format_html("<b>{}({})</b>", result.city,(result.state))
-
-    # Update Permission
-    def has_change_permission(self, request, obj=None):
-        return False
-    
-    def has_add_permission(self, request, obj=None):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
-admin.site.register(UserDetail, UserDetailAdmin)
 
 # Group Model
 admin.site.unregister(Group)

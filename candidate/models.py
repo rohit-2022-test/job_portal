@@ -15,8 +15,8 @@ from options import (
 
 class Base(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
-    start_date = MonthField(blank=True, null=True, default=timezone.now)
-    end_date = MonthField(blank=True, null=True, default=timezone.now)
+    start_date = MonthField(blank=True, null=True)
+    end_date = MonthField(blank=True, null=True)
     description = models.TextField(blank=True)
     created_at = models.DateField(blank=True, null=True, default=timezone.now)
     updated_at = models.DateField(blank=True, null=True, default=timezone.now)
