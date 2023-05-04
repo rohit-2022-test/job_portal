@@ -20,6 +20,10 @@ class Company(SoftDeleteModel):
     created_at = models.DateField(blank=True, null=True, default=timezone.now)
     updated_at = models.DateField(blank=True, null=True, default=timezone.now)
 
+    @property
+    def compane_name(self):
+        return self.name
+
     def __str__(self):
         return f'{self.name}'
     
