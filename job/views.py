@@ -5,11 +5,8 @@ from job.models import Job, JobApplicants
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
 
-
 # Create your views here.
 def job_list(request):
-    job_list = Job.objects.all()
-
     job_type_dict = {}
     job_type_list = ['full-time',
                     'part-time',
@@ -22,42 +19,17 @@ def job_list(request):
         job_type_dict[i] = job_type_count
 
     #Filter 
-    filter_job = JobFilter(request.GET, queryset=job_list)
-
-    paginator = Paginator(job_list,2)
+    filter_job = JobFilter(request.GET, queryset=Job.objects.all())
+    paginator = Paginator(filter_job.qs,2)
     page = request.GET.get('page')
     paged_list = paginator.get_page(page)
 
     context = {
-        'job_list' : job_list,
         'filter' : filter_job,
         'job_type_dict' : job_type_dict,
         'paged_list' : paged_list
     }
     return render(request,'job/job_list.html',context)
-
-def job_filter(request):
-    job_list = Job.objects.all()
-    job_type_dict = {}
-    job_type_list = ['full-time',
-                    'part-time',
-                    'self-employed',
-                    'frelance',
-                    'contract',
-                    'internship']
-    for i in job_type_list:
-        job_type_count = Job.objects.filter(job_type=i).count()
-        job_type_dict[i] = job_type_count
-
-    #Filter 
-    filter_job = JobFilter(request.GET, queryset=job_list)
-
-    context = {
-        'job_list' : job_list,
-        'filter' : filter_job,
-        'job_type_dict' : job_type_dict,
-    }
-    return render(request,'job/job_filter.html',context)
 
 
 def job_detail(request,id): 

@@ -72,16 +72,15 @@
                             
                             <div>
                                 <label class="font-semibold">Salary</label>
-                                <div class="block mt-2">
-                                    {{filter.form.salary}}
+                                <div class="block mt-2">   
                                     <div>
                                         <label class="inline-flex items-center">
-                                            
-                                            <!-- <span class="ml-2 text-slate-400">1000 - 5000</span> -->
+                                            {{filter.form.salary}}
+                                            <span class="ml-2 text-slate-400">1000 - 5000</span>
                                         </label>
                                     </div>
                   
-                                    <!-- <div>
+                                    <div>
                                         <label class="inline-flex items-center">
                                             {{filter.form.salary}}
                                             <span class="ml-2 text-slate-400">5000 - 10000</span>
@@ -92,20 +91,15 @@
                                             {{filter.form.salary}}
                                             <span class="ml-2 text-slate-400">more than 10000</span>
                                         </label>
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
 
                             <div>
-                                <!-- <form action="{% url 'job_filter' %}?{{ request.GET.urlencode }}">
-                                    <input type="submit" class="btn bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md w-full" value="Apply Filter">
-                                </form> -->
-                                <form action="{% url 'job_filter' %}?{{ request.GET.urlencode }}"></form>
-                                    <a href="{% url 'job_filter' %}?{{ request.GET.urlencode }}" class="btn bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md w-full">Apply Filter</a>
-                                </form>
+                                <input type="submit" class="btn bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md w-full" value="Apply Filter">
                             </div>
                         </div>
-                    </form> 
+                    </form>
                 </div>
             </div><!--end col-->
 
@@ -183,8 +177,8 @@
                                 {% endif %}
                                 {% for i in paged_list.paginator.page_range %}
                                 {% if paged_list.number == i %}
-                                <li active>
-                                    <a  href="?page={{i}}" aria-current="page" class="w-[40px] h-[40px] inline-flex justify-center items-center text-slate-400 hover:text-white bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-700 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600">{{i}}</a>
+                                <li >
+                                    <a href="?page={{i}}" aria-current="page" class="z-10 w-[40px] h-[40px] inline-flex justify-center items-center text-white bg-emerald-600 border border-emerald-600">{{i}}</a>
                                 </li>
                                 {% else %}
                                 <li>
