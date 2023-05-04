@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -71,13 +72,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 
 DATABASES = {
-    'default': {
-        'ENGINE': os.environ.get('ENGINE'),
-        'NAME': os.environ.get('NAME'),
-        'USER': os.environ.get('USER'),
-        'PASSWORD': os.environ.get('PASSWORD'),
-        'HOST': os.environ.get('HOST')
-    }
+    "default" : dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
 # Password validation
