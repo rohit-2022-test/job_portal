@@ -14,7 +14,12 @@
                         <div class="grid grid-cols-1">
                             <div class="mb-4 ltr:text-left rtl:text-right mt-3">
                                 <label class="font-semibold" for="RegisterName">Skill Name:</label>
-                                <input id="RegisterName" type="text" name="skill_name" class="form-input mt-1 rounded-md">
+                                <input id="RegisterName" type="text" list="skilles" name="skill_name" class="form-input mt-1 rounded-md">
+                                <datalist id="skilles" name="data_location">
+                                    {% for i in skilles %}
+                                        <option value="{{i}}"></option>
+                                    {% endfor %}
+                                </datalist>
                             </div>
 
                             <div class="mb-7">
