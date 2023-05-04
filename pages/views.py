@@ -24,7 +24,6 @@ def contact(request):
             name = form.cleaned_data.get('name')
             subject = form.cleaned_data.get('subject')
             email = form.cleaned_data.get('email')
-            print(email)
             date_of_request = Contact.objects.filter(name=name).values_list('created_at',flat=True).last()
             send_mail(
                 'Ecommerce Inquiry',
