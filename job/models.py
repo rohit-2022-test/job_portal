@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from softdelete.models import SoftDeleteModel
+from ckeditor.fields import RichTextField
 from options import (
     Job_application_collection,
     Schedule_interview_mode,
@@ -14,6 +15,22 @@ from master_table.models import (
     Location,
     Skill
 )
+
+data = '''
+<b>Tips:</b> Provide a summary of the role, what success in the position looks like, and how this role fits into the organization overall.<br>
+
+<b>Responsibilities</b>
+
+<p>[Be specific when describing each of the responsibilities. Use gender-neutral, inclusive language.]<br>
+
+Example: Determine and develop user requirements for systems in production, to ensure maximum usability</p>
+
+<b>Qualifications</b>
+
+<p>[Some qualifications you may want to include are Skills, Education, Experience, or Certifications.]<br>
+
+Example: Excellent verbal and written communication skills</p>
+'''
 
 class Base(models.Model):
     candidate_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
@@ -33,7 +50,7 @@ class Job(Base, SoftDeleteModel):
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE, blank=False, null=False)
     job_type = models.CharField(max_length=100, choices=Experience_job_type, default='frelance')
     workplace_type = models.CharField(max_length=50, choices=Experience_workplace_type, default='on-site')
-    datails = models.TextField(blank=False)
+    datails = RichTextField(default=data,blank=False)
     applicants_collection_mode = models.CharField(max_length=50, choices=Job_application_collection, default='email')
     applicants_collection_link_email = models.CharField(max_length=255, blank=False, null=False)
     applicants_limit = models.IntegerField(blank=False, null=False, default=15)

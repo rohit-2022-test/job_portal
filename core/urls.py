@@ -15,4 +15,7 @@ urlpatterns = [
     # Candidate
     path('candidate/',include('candidate.urls')),
 
+    # Job
+    path('job/',include('job.urls')),
+
 ] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
