@@ -1,0 +1,51 @@
+{% load static %}
+{% if project_cource %}
+    {% for key, value in project_cource.items %}
+        {% if key == "project" %}
+            {% if value %}
+            <h4 class="mt-6 text-xl font-semibold">Projects : <a href="{% url 'project' %}"><i class="uil uil-file-edit-alt"  style="display:inline-block; float:right; "></i></a></h4>
+                {% for i in value %}  
+                <div class="flex mt-6">
+                    <div class="text-slate-400 font-semibold min-w-[80px] text-center">
+                        <img src="{% static 'images/company/shree-logo.png' %}" class="h-16 w-16 mx-auto mb-2 block" alt="">
+                    </div>
+
+                    <div class="ltr:ml-4 rtl:mr-4">
+                        <h5 class="text-lg font-medium mb-0">{{i.project_name}} <a href="{% url 'update_project' i.id %}"><i class="uil uil-edit"  style="display:inline-block; float:right; "></i></a></h5>
+                        <span class="text-slate-400 company-university">Associate : {{i.associate}}</span><br>
+                        <span class="text-slate-400 company-university">Project URL : {{i.project_url}}</span><br>
+                        <span class="text-slate-400 company-university">Workplace Type : {{i.workplace_type}}</span><br>
+                        <span class="text-slate-400 company-university">Currently working : {{i.currently_working}}</span><br>
+                        <span class="text-slate-400 company-university">Start Data : {{i.start_date}}</span><br>
+                        <span class="text-slate-400 company-university">End Data : {{i.end_date}}</span><br>
+                        <span class="text-slate-400 company-university">Role : {{i.role}}</span>
+                        <p class="text-slate-400 mt-2 mb-0">Role Description : {{i.role_description}} </p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% else %}
+            {% if value %}
+            <h4 class="mt-6 text-xl font-semibold">Cources : <a href="{% url 'cource' %}"><i class="uil uil-file-edit-alt"  style="display:inline-block; float:right; "></i></a></h4>
+                {% for i in value %}
+                <div class="flex mt-6">
+                    <div class="text-slate-400 font-semibold min-w-[80px] text-center">
+                        <img src="{% static 'images/company/shree-logo.png' %}" class="h-16 w-16 mx-auto mb-2 block" alt="">
+                    </div>
+
+                    <div class="ltr:ml-4 rtl:mr-4">
+                        <h5 class="text-lg font-medium mb-0">{{i.course_name}} <a href="{% url 'update_cource' i.id %}"><i class="uil uil-edit"  style="display:inline-block; float:right; "></i></a></h5>
+                        <span class="text-slate-400 company-university">Associate : {{i.associate}}</span><br>
+                        <span class="text-slate-400 company-university">Currently working : {{i.currently_working}}</span><br>
+                        <span class="text-slate-400 company-university">Start Data : {{i.start_date}}</span><br>
+                        <span class="text-slate-400 company-university">End Data : {{i.end_date}}</span><br>
+                        <p class="text-slate-400 mt-2 mb-0">Description : {{i.description}} </p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+
