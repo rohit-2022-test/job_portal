@@ -56,6 +56,10 @@ class Job(Base, SoftDeleteModel):
     applicants_limit = models.IntegerField(blank=False, null=False, default=15)
     skill = models.ManyToManyField(Skill)
 
+    @property
+    def compane_name(self):
+        return self.company_id
+
     def __str__(self):
         return f'{self.job_title}'
     
