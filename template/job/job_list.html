@@ -72,26 +72,19 @@
                             
                             <div>
                                 <label class="font-semibold">Salary</label>
-                                <div class="block mt-2">   
-                                    <div>
-                                        <label class="inline-flex items-center">
-                                            {{filter.form.salary}}
-                                            <span class="ml-2 text-slate-400">1000 - 5000</span>
-                                        </label>
-                                    </div>
-                  
-                                    <div>
-                                        <label class="inline-flex items-center">
-                                            {{filter.form.salary}}
-                                            <span class="ml-2 text-slate-400">5000 - 10000</span>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="inline-flex items-center">
-                                            {{filter.form.salary}}
-                                            <span class="ml-2 text-slate-400">more than 10000</span>
-                                        </label>
-                                    </div>
+                                <div class="block mt-2"> 
+                                    <label class="inline-flex items-center">
+                                        {{filter.form.salary__lt}}
+                                        <span class="ml-2 text-slate-400">Minimum</span>
+                                    </label>
+                                    
+                                </div>
+                                <div class="block mt-2"> 
+                                    <label class="inline-flex items-center">
+                                        {{filter.form.salary__gt}}
+                                        <span class="ml-2 text-slate-400">Maximum</span>
+                                    </label>
+                                    
                                 </div>
                             </div>
 
@@ -150,9 +143,13 @@
                                 <span class="inline-block ltr:mr-1 rtl:ml-1 text-slate-400"><i class="uil uil-map-marker text-[18px] text-slate-900 dark:text-white ltr:mr-1 rtl:ml-1"></i>{{i.location_id.city}}</span>
                             </div>
 
-                            <a href="{% url 'job_apply' %}" class="btn btn-sm rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white ltr:md:ml-2 rtl:md:mr-2 w-full md:w-auto">Apply Now</a>
-                        </div>
-                        
+                            <form action="{% url 'job_apply' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{i.id}}"> 
+                                <button class="btn rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white ltr:md:ml-2 rtl:md:mr-2 w-full md:w-auto">Apply Now</button>
+         
+                            </form>
+                        </div>                       
                     </div><!--end content-->
                     {% endfor %}
                 </div><!--end grid-->
