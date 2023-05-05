@@ -1,4 +1,6 @@
 from django.shortcuts import redirect, render
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 from job.filter import JobFilter
 from job.models import Job, JobApplicants
 from django.core.mail import send_mail
@@ -39,22 +41,26 @@ def job_detail(request,id):
     return render(request,'job/job_detail.html',context)
 
 def job_apply(request):
-    if request.method == 'POST':
-        job_id = request.POST.get('id')
-        job_instance_id = Job.objects.get(id=job_id)
-        if job_instance_id.applicants_collection_mode == 'email':    
-            JobApplicants.objects.create(candidate_id=request.user,job_id=job_instance_id)
-            send_mail(
-                'Inquiry for Job',
-                f"There has been an inquiry for job aaplication. Name: {request.user}",
-                'joshijaya.shivinfotech@gmail.com',
-                ('joshijaya29@gmail.com',job_instance_id.applicants_collection_link_email,),
-                fail_silently=False
-                ) 
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            job_id = request.POST.get('id')
+            job_instance_id = Job.objects.get(id=job_id)
+            if job_instance_id.applicants_collection_mode == 'email':    
+                JobApplicants.objects.create(candidate_id=request.user,job_id=job_instance_id)
+                send_mail(
+                    'Inquiry for Job',
+                    f"There has been an inquiry for job aaplication. Name: {request.user}",
+                    'joshijaya.shivinfotech@gmail.com',
+                    ('joshijaya29@gmail.com',job_instance_id.applicants_collection_link_email,),
+                    fail_silently=False
+                    ) 
 
-            return redirect('job_list')
-        else: 
-            JobApplicants.objects.create(candidate_id=request.user,job_id=job_instance_id)
+                return redirect('job_list')
+            else: 
+                JobApplicants.objects.create(candidate_id=request.user,job_id=job_instance_id)
 
-            return redirect(job_instance_id.applicants_collection_link_email)
+                return redirect(job_instance_id.applicants_collection_link_email)
+    else: 
+        return HttpResponseRedirect('signup',request.META.get('HTTP_REFERER'))  
+        
   

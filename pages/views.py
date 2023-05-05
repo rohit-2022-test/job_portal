@@ -1,10 +1,18 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+from django.db.models import Q
+from pages.filter import JobFilter
+from job.models import Job
 from pages.form import ContactForm
 from pages.models import Contact
+from django.core.paginator import Paginator
 
 def index(request):
-    return render(request,'pages/index.html')
+    filter_job = JobFilter(request.GET, queryset=Job.objects.all())
+    context = {
+        'filter' : filter_job,
+    }
+    return render(request,'pages/index.html',context)
 
 def about(request):
     return render(request,'pages/about_us.html')
@@ -38,3 +46,22 @@ def contact(request):
         }
     return render(request,'pages/contact.html',context)
 
+
+def search(request):
+    job_filter = Job.objects.all()
+    if 'keywords' in request.GET:
+        keywords = request.GET['keywords']
+        if keywords:
+            job_filter = job_filter.filter(Q(job_title__icontains=keywords) | Q(job_type__icontains=keywords) | Q(datails__icontains=keywords) | Q(workplace_type__icontains=keywords))
+
+
+    filter_job = JobFilter(request.GET, queryset=job_filter)
+    paginator = Paginator(filter_job.qs,2)
+    page = request.GET.get('page')
+    paged_list = paginator.get_page(page)
+    context = {
+        'paged_list' : job_filter,
+        'paged_list' : paged_list,
+
+    }
+    return render(request,'pages/search.html',context)
