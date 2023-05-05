@@ -45,7 +45,7 @@ class Job(Base, SoftDeleteModel):
     creater_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE, blank=False, null=False)
     job_title = models.CharField(max_length=255, blank=False, null=False)
-    salary = models.CharField(max_length=20, blank=False, null=False)
+    salary = models.IntegerField(blank=False, null=False)
     experiance = models.CharField(max_length=100, blank=False, null=False)
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE, blank=False, null=False)
     job_type = models.CharField(max_length=100, choices=Experience_job_type, default='frelance')

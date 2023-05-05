@@ -1,4 +1,3 @@
-from django.db.models import Count
 from django.shortcuts import redirect, render
 from job.filter import JobFilter
 from job.models import Job, JobApplicants
