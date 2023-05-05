@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Start Hero -->
+<section class="relative table w-full py-36 bg-[url('../../images/hero/bg.html')] bg-top bg-no-repeat bg-cover">
+    <div class="absolute inset-0 bg-emerald-900/90"></div>
+    <div class="container">
+        <div class="grid grid-cols-1 text-center mt-10">
+            <h3 class="md:text-3xl text-2xl md:leading-snug tracking-wide leading-snug font-medium text-white">Job Vacancies</h3>
+        </div><!--end grid-->
+    </div><!--end container-->
+
+    <div class="absolute text-center z-10 bottom-5 right-0 left-0 mx-3">
+        <ul class="breadcrumb tracking-[0.5px] breadcrumb-light mb-0 inline-block">
+           <li class="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white/50 hover:text-white"><a href="index.html">Jobstack</a></li>
+            <li class="inline breadcrumb-item text-[15px] font-semibold duration-500 ease-in-out text-white" aria-current="page">Job Listing</li>
+        </ul>
+    </div>
+</section><!--end section-->
+<div class="relative">
+    <div class="shape absolute right-0 sm:-bottom-px -bottom-[2px] left-0 overflow-hidden z-1 text-white dark:text-slate-900">
+        <svg class="w-full h-auto" viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+    </div>
+</div>
+<!-- End Hero -->
+
+<!-- Start -->
+<section class="relative md:py-24 py-16">
+    <div class="container">
+        <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
+            <div class="lg:col-span-4 md:col-span-6">
+                <div class="shadow dark:shadow-gray-700 p-6 rounded-md bg-white dark:bg-slate-900 sticky top-20">
+                    <form method="get">
+                        <div class="grid grid-cols-1 gap-3">
+                            <div>
+                                <label for="searchname" class="font-semibold">Search Company</label>
+                                <div class="relative mt-2">
+                                    <i class="uil uil-search text-lg absolute top-[5px] ltr:left-3 rtl:right-3"></i>
+                                    {{ filter.form.job_title }}
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="font-semibold">Location</label>
+                                {{ filter.form.location_id }}
+                            </div>
+                            
+                            <div>
+                                <label class="font-semibold">Job Types</label>
+                                <div class="block mt-2">
+                                    {% for choice in filter.form.job_type %}
+                                        <div class="flex justify-between">
+                                            <label class="inline-flex items-center">
+                                                {{ choice.tag }}
+                                                <span class="ml-2 text-slate-400">{{ choice.choice_label }}</span>
+                                            </label>
+
+                                            <span class="bg-emerald-600/10 text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full h-5">
+                                                {% for key, value in job_type_dict.items %}
+                                                    {% if key == choice.choice_label %}
+                                                    {{ value }}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </span>
+                                    
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="font-semibold">Salary</label>
+                                <div class="block mt-2"> 
+                                    <label class="inline-flex items-center">
+                                        {{filter.form.salary__lt}}
+                                        <span class="ml-2 text-slate-400">Minimum</span>
+                                    </label>
+                                    
+                                </div>
+                                <div class="block mt-2"> 
+                                    <label class="inline-flex items-center">
+                                        {{filter.form.salary__gt}}
+                                        <span class="ml-2 text-slate-400">Maximum</span>
+                                    </label>
+                                    
+                                </div>
+                            </div>
+
+                            <div>
+                                <input type="submit" class="btn bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md w-full" value="Apply Filter">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!--end col-->
+
+            <div class="lg:col-span-8 md:col-span-6">
+                <div class="grid grid-cols-1 gap-[30px]">  
+                    {% for i in paged_list %} 
+                    <div class="group relative overflow-hidden bg-white dark:bg-slate-900 shadow hover:shadow-md dark:shadow-gray-700 dark:hover:shadow-gray-700 hover:-mt-2 rounded-md transition-all duration-500 h-fit">
+                        
+                        <div class="p-6">
+                            <div class="flex items-center">
+                                <div class="w-14 h-14 min-w-[56px] flex items-center justify-center bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 rounded-md">
+                                    <img src="{{ i.company_id.logo.url }}" class="h-8 w-8"  alt="">
+                                </div>
+    
+                                <div class="ltr:ml-3 rtl:mr-3">
+                                    <a href="{% url 'job_detail' i.id %}" class="inline-block text-[16px] font-semibold hover:text-emerald-600 transition-all duration-500 ltr:mr-1 rtl:ml-1">{{i.job_title}}</a>
+                                    <span class="inline-block text-sm text-slate-400">{{i.created_at|timesince}}</span>
+                                    <div>
+                                        <span class="bg-emerald-600/10 inline-block text-emerald-600 text-xs px-2.5 py-0.5 font-semibold rounded-full ltr:mr-1 rtl:ml-1">{{i.job_type}}</span>
+                                        <span class="text-sm font-medium inline-block ltr:mr-1 rtl:ml-1">Est. time: <span class="text-slate-400">1 to 3 months</span></span>
+                                        <span class="text-sm font-medium inline-block ltr:mr-1 rtl:ml-1">Hourly: <span class="text-slate-400">{{i.salary}}</span></span>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <p class="text-slate-400 py-3">{{i.datails|safe|truncatewords:"10"}}
+                                <a href="{% url 'job_detail' i.id %}">read more</a>
+                            </p>
+    
+                            <div>
+                                {% for j in i.skill.all %}
+                                <span class="bg-slate-100 dark:bg-slate-800 inline-block text-slate-900 dark:text-slate-300 text-xs px-2.5 py-0.5 font-semibold rounded-full ltr:mr-1 rtl:ml-1">{{j}}</span>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                        <div class="px-6 py-2 bg-slate-50 dark:bg-slate-800 flex justify-between items-center">
+                            <div>
+                                <span class="inline-block ltr:mr-1 rtl:ml-1 font-semibold"><i class="mdi mdi-check-decagram mdi-18px text-blue-500 ltr:mr-1 rtl:ml-1"></i>Verified</span>
+                                <ul class="list-none inline-block ltr:mr-1 rtl:ml-1 text-yellow-400">
+                                    <li class="inline"><i class="mdi mdi-star text-lg"></i></li>
+                                    <li class="inline"><i class="mdi mdi-star text-lg"></i></li>
+                                    <li class="inline"><i class="mdi mdi-star text-lg"></i></li>
+                                    <li class="inline"><i class="mdi mdi-star text-lg"></i></li>
+                                    <li class="inline"><i class="mdi mdi-star text-lg"></i></li>
+                                </ul>
+                                <span class="inline-block ltr:mr-1 rtl:ml-1 text-slate-400"><i class="uil uil-map-marker text-[18px] text-slate-900 dark:text-white ltr:mr-1 rtl:ml-1"></i>{{i.location_id.city}}</span>
+                            </div>
+
+                            <form action="{% url 'job_apply' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{i.id}}"> 
+                                <button class="btn rounded-md bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white ltr:md:ml-2 rtl:md:mr-2 w-full md:w-auto">Apply Now</button>
+         
+                            </form>
+                        </div>                       
+                    </div><!--end content-->
+                    {% endfor %}
+                </div><!--end grid-->
+                
+                <div class="grid md:grid-cols-12 grid-cols-1 mt-8">
+                    <div class="md:col-span-12 text-center">
+                        <nav aria-label="Page navigation example">
+                            {% if paged_list.has_other_pages %}
+                            <ul class="inline-flex items-center -space-x-px">
+                                {% if paged_list.has_previous %}
+                                <li>
+                                    <a href="?page={{paged_list.previous_page_number}}" class="w-[40px] h-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 ltr:rounded-l-3xl rtl:rounded-r-3xl hover:text-white border border-gray-100 dark:border-gray-700 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600">
+                                       <i class="uil uil-angle-left text-[20px] rtl:rotate-180 rtl:-mt-1"></i>
+                                    </a>
+                                </li>
+                               {% else %} 
+                               <li>
+                                    <a class="w-[40px] h-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 ltr:rounded-l-3xl rtl:rounded-r-3xl hover:text-white border border-gray-100 dark:border-gray-700 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600">
+                                        <i class="uil uil-angle-left text-[20px] rtl:rotate-180 rtl:-mt-1"></i>
+                                    </a>
+                                </li>
+                                {% endif %}
+                                {% for i in paged_list.paginator.page_range %}
+                                {% if paged_list.number == i %}
+                                <li >
+                                    <a href="?page={{i}}" aria-current="page" class="z-10 w-[40px] h-[40px] inline-flex justify-center items-center text-white bg-emerald-600 border border-emerald-600">{{i}}</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a  href="?page={{i}}" class="w-[40px] h-[40px] inline-flex justify-center items-center text-slate-400 hover:text-white bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-700 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600">{{i}}</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                                {% if filter.has_next %}
+                                <li>
+                                    <a href="?page={{paged_list.next_page_number}}" class="w-[40px] h-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 ltr:rounded-r-3xl rtl:rounded-l-3xl hover:text-white border border-gray-100 dark:border-gray-700 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600">
+                                        <i class="uil uil-angle-right text-[20px] rtl:rotate-180 rtl:-mt-1"></i>
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a class="w-[40px] h-[40px] inline-flex justify-center items-center text-slate-400 bg-white dark:bg-slate-900 ltr:rounded-r-3xl rtl:rounded-l-3xl hover:text-white border border-gray-100 dark:border-gray-700 hover:border-emerald-600 dark:hover:border-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-600">
+                                       <i class="uil uil-angle-right text-[20px] rtl:rotate-180 rtl:-mt-1"></i>
+                                    </a>
+                                </li>
+                                {%  endif %}
+                            </ul>
+                            {% endif %}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end container-->
+
+</section><!--end section-->
+<!-- End -->
+{% endblock %}

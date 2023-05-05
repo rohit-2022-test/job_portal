@@ -31,6 +31,35 @@
         <!-- End Mobile Toggle -->
 
         <!--Login button Start-->
+        <!-- <ul class="buy-button list-none mb-0">
+            <li class="inline-block mb-0">
+                <div class="relative top-[3px]">
+                    <i class="uil uil-search text-lg absolute top-[3px] ltr:right-3 rtl:left-3"></i>
+                    <input type="text" class="form-input h-9 ltr:pr-10 rtl:pr-10 rounded-3xl sm:w-44 w-36 border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900" name="s" id="searchItem" placeholder="Search...">
+                </div>
+            </li>
+            <li class="inline-block pl-1 mb-0 relative">
+                <div class="b-click">
+                <a class="btn btn-icon rounded-full bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white">
+                    <img src="{% static 'images/team/05.jpg' %}" class="rounded-full" alt="">
+                </a>
+                    <div class="card ">
+                        
+                        <div class="card" style="width: 200px; margin-right: 25px;">
+                            {% if user.is_authenticated %} 
+                            <a href="{% url 'candidate_detail' %}" >My Profile</a><br>
+                            <br><hr><br>
+                            <a href="{% url 'logout' %}">Log Out</a><br>
+                            {% else %}
+                            <a href="{% url 'signup' %}">Sign Up</a><br>
+                            <br><hr><br>
+                            <a href="{% url 'login' %}">Log In</a><br>
+                            {% endif %}
+                        </div>
+                </div>
+            </li>
+        </ul> -->
+
         <ul class="buy-button list-none mb-0">
             <li class="inline-block mb-0">
                 <div class="relative top-[3px]">
@@ -38,8 +67,23 @@
                     <input type="text" class="form-input h-9 ltr:pr-10 rtl:pr-10 rounded-3xl sm:w-44 w-36 border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900" name="s" id="searchItem" placeholder="Search...">
                 </div>
             </li>
-            <li class="inline-block pl-1 mb-0">
-                <a href="#" class="btn btn-icon rounded-full bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white"><img src="{% static 'images/team/05.jpg' %}" class="rounded-full" alt=""></a>
+            <li class="inline-block pl-1 mb-0 relative">
+                <div class="b-click">
+                <a class="btn btn-icon rounded-full bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white">
+                    <img src="{% static 'images/team/05.jpg' %}" class="rounded-full" alt="">
+                </a>
+                    <div class="card" style="width: 200px; margin-right: 25px;">
+                        {% if user.is_authenticated %} 
+                        <a href="{% url 'candidate_detail' %}" >My Profile</a><br>
+                        <br><hr><br>
+                        <a href="{% url 'logout' %}">Log Out</a><br>
+                        {% else %}
+                        <a href="{% url 'signup' %}">Sign Up</a><br>
+                        <br><hr><br>
+                        <a href="{% url 'login' %}">Log In</a><br>
+                        {% endif %}
+                    </div>
+                </div>
             </li>
         </ul>
         <!--Login button End-->
@@ -48,19 +92,20 @@
             <!-- Navigation Menu-->
             <ul class="navigation-menu justify-end">
                 <li>
-                    <a href="index.html" class="sub-menu-item">Home</a>
+                    <a href="{% url 'index' %}" class="sub-menu-item">Home</a>
                 </li>
                 <li>
-                    <a href="index.html" class="sub-menu-item">Jobs</a>
+                    <a href="{% url 'job_list' %}" class="sub-menu-item">Jobs</a>
                 </li>
                 <li>
-                    <a href="index.html" class="sub-menu-item">About Us</a>
+                    <a href="{% url 'about' %}" class="sub-menu-item">About Us</a>
                 </li>
                 <li>
-                    <a href="index.html" class="sub-menu-item">Contact</a>
+                    <a href="{% url 'contact' %}" class="sub-menu-item">Contact</a>
                 </li>
             </ul><!--end navigation menu-->
         </div><!--end navigation-->
     </div><!--end container-->
 </nav><!--end header-->
 <!-- End Navbar -->
+
