@@ -1,8 +1,10 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render
 from job.filter import JobFilter
 from job.models import Job, JobApplicants
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def job_list(request):
@@ -38,20 +40,21 @@ def job_detail(request,id):
     }
     return render(request,'job/job_detail.html',context)
 
+@login_required
 def job_apply(request):
     if request.method == 'POST':
         job_id = request.POST.get('id')
         job_instance_id = Job.objects.get(id=job_id)
         if job_instance_id.applicants_collection_mode == 'email':    
             JobApplicants.objects.create(candidate_id=request.user,job_id=job_instance_id)
-            send_mail(
-                'Inquiry for Job',
-                f"There has been an inquiry for job aaplication. Name: {request.user}",
-                'joshijaya.shivinfotech@gmail.com',
-                ('joshijaya29@gmail.com',job_instance_id.applicants_collection_link_email,),
-                fail_silently=False
-                ) 
-
+            # send_mail(
+            #     'Inquiry for Job',
+            #     f"There has been an inquiry for job aaplication. Name: {request.user}",
+            #     'joshijaya.shivinfotech@gmail.com',
+            #     ('joshijaya29@gmail.com',job_instance_id.applicants_collection_link_email,),
+            #     fail_silently=False
+            #     ) 
+            messages.success(request, f'Successfully apply for {job_instance_id} job at {job_instance_id.company_id.name}')
             return redirect('job_list')
         else: 
             JobApplicants.objects.create(candidate_id=request.user,job_id=job_instance_id)
