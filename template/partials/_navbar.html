@@ -62,10 +62,12 @@
 
         <ul class="buy-button list-none mb-0">
             <li class="inline-block mb-0">
+                <form action="{% url 'search' %}" method="get">
                 <div class="relative top-[3px]">
-                    <i class="uil uil-search text-lg absolute top-[3px] ltr:right-3 rtl:left-3"></i>
-                    <input type="text" class="form-input h-9 ltr:pr-10 rtl:pr-10 rounded-3xl sm:w-44 w-36 border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900" name="s" id="searchItem" placeholder="Search...">
+                    <button class="uil uil-search text-lg absolute top-[3px] ltr:right-3 rtl:left-3"></button>
+                    <input type="text" name="keywords" class="form-input h-9 ltr:pr-10 rtl:pr-10 rounded-3xl sm:w-44 w-36 border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900" name="s" id="searchItem" placeholder="Search...">
                 </div>
+                </form>
             </li>
             <li class="inline-block pl-1 mb-0 relative">
                 <div class="b-click">

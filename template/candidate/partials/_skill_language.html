@@ -20,9 +20,9 @@
                     <div class="flex justify-between ">
                         <h6 class="text-lg font-medium mb-0">
                             {% if key == "skill" %}
-                                {{i.skill_id.name}} <a href="{% url 'delete_skill' i.id %}"><span></span><i class="uil uil-file-edit-alt"  style="display:inline-block; float:right; "></i></a>
+                                {{i.skill_id.name}} <a href="{% url 'delete_skill' i.id %}"><span></span><i class="uil uil-file-times-alt"  style="display:inline-block; float:right; "></i></a>
                             {% else %}
-                              <span> {{ i.language_id.name }}  <a href="{% url 'delete_language' i.id %}"><i class="uil uil-file-edit-alt"  style="display:inline-block; float:right; "></i></a>
+                              <span> {{ i.language_id.name }}  <a href="{% url 'delete_language' i.id %}"><i class="uil uil-file-times-alt"  style="display:inline-block; float:right; "></i></a>
                                 <p class="text-slate-400">({{i.proficiency}})</p></span>   
                             {% endif %}
                         </h6>

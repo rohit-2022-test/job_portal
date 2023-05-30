@@ -28,6 +28,6 @@ urlpatterns = [
     template_name='account/password_reset_complete.html'),
     name='password_reset_complete'),
 
-    path('logout/',auth_views.LogoutView.as_view(template_name=views.auth_page),
+    path('logout/',auth_views.LogoutView.as_view(),
          name='logout'),
 ]
