@@ -1,5 +1,8 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,6 +18,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    # Admin
+    'jazzmin',
+    'ckeditor',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -22,8 +28,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third Part App
+
     # Install App
-    'pages',
+    
+    'account.apps.AccountConfig',
+    'candidate.apps.CandidateConfig',
+    'job.apps.JobConfig',
+    'pages.apps.PagesConfig',
+    'recruiter.apps.RecruiterConfig',
+    'master_table.apps.MasterTableConfig',
+    'company.apps.CompanyConfig',
 ]
 
 MIDDLEWARE = [
@@ -60,11 +74,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.environ.get('ENGINE'),
+        'NAME': os.environ.get('NAME'),
+        'USER': os.environ.get('USER'),
+        'PASSWORD': os.environ.get('PASSWORD'),
+        'HOST': os.environ.get('HOST')
     }
 }
-
 
 # Password validation
 
@@ -99,5 +115,17 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
+# Media File (Images)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#Email
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'joshijaya.shivinfotech@gmail.com'
+EMAIL_HOST_PASSWORD = 'nrfpbvlzvhiocxgf'
+EMAIL_USE_TLS=True

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="flex items-center justify-center relative  bg-[url('../../assets/images/hero/bg3.html')] bg-no-repeat bg-center bg-cover">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
+    <div class="container">
+        <div style="display: flex; justify-content: center;" class="mt-20">
+            <div class="relative  bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="width: 500px">
+                <div class="p-6">
+                    <h5 class="text-xl font-semibold">Projects</h5>
+                    {% if update_project %}
+                    {% for i in update_project %}
+                    <form action="{% url 'update_project' i.id %}" method="post" class="text-left">
+                        {% csrf_token %}
+                        <div class="grid grid-cols-1">
+
+                            <div class="mb-4 ltr:text-left rtl:text-right mt-3">
+                                <label class="font-semibold" for="RegisterName">Project Name:</label>
+                                <input id="RegisterName" type="text" class="form-input mt-3 rounded-md" name="project_name" value="{{i.project_name}}" required>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <input type="checkbox" name="currently_working" value="{{i.currently_working}}" {% if i.currently_working %}checked{% endif %} placeholder="{{i.currently_working}}">
+                                <label for="vehicle1"> Currently working</label><br>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">Start Data:</label>
+                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="start_date" placeholder="{{i.start_date}}" value="{{i.start_date}}" required>
+                            </div>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">End Data:</label>
+                                <input id="RegisterName" type="month" class="form-input mt-1 rounded-md" name="end_date" placeholder="{{i.end_date}}" value="{{i.end_date }}">
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">Associate:</label>
+                                <input type="text" class="form-input mt-3 rounded-md" name="associate" value="{{i.associate}}" required>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">Project Urls:</label>
+                                <input type="text" class="form-input mt-3 rounded-md" name="project_url" value="{{i.project_url}}" required>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">Description:</label>
+                                <input type="text" class="form-input mt-3 rounded-md" name="description" placeholder="{{i.description}}" value="{{i.description}}">
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="LoginEmail">Workplace type:</label>
+                                <select id="LoginEmail" name="workplace_type" class="form-input mt-3 rounded-md form-select fa-caret-down">
+                                    <option value="on-site">on-site</option>
+                                    <option value="hybrid">hybrid</option>
+                                    <option value="remote">remote</option>
+                                </select>
+                                  
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">Role:</label>
+                                <input type="text" class="form-input mt-3 rounded-md" name="role" value="{{i.role}}" required>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="RegisterName">Role description:</label>
+                                <input type="text" class="form-input mt-3 rounded-md" name="role_description" value="{{i.role_description}}">
+                            </div>
+                            
+                            <div class="mb-7">
+                                <input type="submit" class="btn bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md w-full" value="Submit">
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--end section -->
+
+{% endblock %}

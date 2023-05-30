@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="h-screen flex items-center justify-center relative overflow-hidden bg-[url('../../assets/images/hero/bg3.html')] bg-no-repeat bg-center bg-cover">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
+    <div class="container">
+        <div style="display: flex; justify-content: center;" class="mt-20">
+            <div class="relative overflow-hidden bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md" style="width: 350px">
+                <div class="p-6">
+                    <h5 class="text-xl font-semibold">User Language</h5>
+                    <form action="{% url 'language' %}" method="post" class="text-left">
+                        {% csrf_token %}
+                        <div class="grid grid-cols-1">
+                            <div class="mb-4 ltr:text-left rtl:text-right mt-3">
+                                <label class="font-semibold" for="RegisterName">Languege:</label>
+                                <input id="RegisterName" type="text" list="languages" name="language_name" placeholder="{{i.language_id.state}}"class="form-input mt-1 rounded-md">
+                                <datalist id="languages" name="data_location">
+                                    {% for i in languages %}
+                                        <option value="{{i}}"></option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+
+                            <div class="mb-4 ltr:text-left rtl:text-right">
+                                <label class="font-semibold" for="LoginEmail">Proficiency:</label>
+                                <select id="LoginEmail" name="proficiency" class="form-input mt-1 rounded-md form-select fa-caret-down">
+                                    <option value="elementary">elementary</option>
+                                    <option value="professional working">professional working</option>
+                                    <option value="native">native</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-7">
+                                <input type="submit" class="btn bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white rounded-md w-full" value="Submit">
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                
+        
+            </div>
+        </div>
+    </div>
+</section><!--end section -->
+
+{% endblock %}

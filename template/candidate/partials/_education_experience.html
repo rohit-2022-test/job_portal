@@ -1,0 +1,52 @@
+{% load static %}
+{% if education_experience %}
+    {% for key, value in education_experience.items %}
+        {% if key == "education" %}
+            <h4 class="mt-6 text-xl font-semibold">Education : <a href="{% url 'education' %}"><i class="uil uil-file-edit-alt"  style="display:inline-block; float:right; "></i></a></h4>
+                {% if value %}
+                    {% for i in value %} 
+                    <div class="flex mt-6">
+                        <div class="text-slate-400 font-semibold min-w-[80px] text-center">
+                            <img src="{% static 'images/company/shree-logo.png' %}" class="h-16 w-16 mx-auto mb-2 block" alt="">
+                        </div>
+                        
+                        <div class="ltr:ml-4 rtl:mr-4">
+                            <h5 class="text-lg font-medium mb-0">{{i.institute_name}} <a href="{% url 'update_education' i.id %}"><i class="uil uil-edit"  style="display:inline-block; float:right; "></i></a></h5>
+                            <span class="text-slate-400 company-university">Course : {{i.course}}</span><br>
+                            <span class="text-slate-400 company-university">Subject : {{i.subject}}</span><br>
+                            <span class="text-slate-400 company-university">Grade : {{i.grade}}</span><br>
+                            <span class="text-slate-400 company-university">Start Data : {{i.start_date}}</span><br>
+                            <span class="text-slate-400 company-university">End Data : {{i.end_date}}</span><br>
+                            <p class="text-slate-400 mt-2 mb-0">Description : {{i.description}}</p>
+                            <p class="text-slate-400 mt-2 mb-0">Activities : {{i.activities}} <a href="{% url 'delete_education' i.id %}"><i class="uil uil-edit"  style="display:inline-block; float:right; "></i></a></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+        {% else %}
+        <h4 class="mt-6 text-xl font-semibold">Experience : <a href="{% url 'experiance' %}"><i class="uil uil-file-edit-alt"  style="display:inline-block; float:right; "></i></a></h4>   
+            {% if value %}
+                {% for i in value %}
+                <div class="flex mt-6">
+                    <div class="text-slate-400 font-semibold min-w-[80px] text-center">
+                        <img src="{% static 'images/company/shree-logo.png' %}" class="h-16 w-16 mx-auto mb-2 block" alt="">
+                    </div>
+            
+                    <div class="ltr:ml-4 rtl:mr-4">
+                        <h5 class="text-lg font-medium mb-0">{{i.job_title}} <a href="{% url 'update_experience' i.id %}"><i class="uil uil-edit"  style="display:inline-block; float:right; "></i></a></h5>
+                        <span class="text-slate-400 company-university">{{i.company_name}} : {{i.location_id.city}}</span>
+                        <p class="text-slate-400 mt-0 mb-0">Job Type : {{i.job_type}}</p>
+                        <p class="text-slate-400 mt-0 mb-0">Workplace Type : {{i.workplace_type}}</p>
+                        <span class="text-slate-400 company-university">Currently working : {{i.currently_working}}</span><br>
+                        <span class="text-slate-400 company-university">Start Data : {{i.start_date}}</span><br>
+                        <span class="text-slate-400 company-university">End Data : {{i.end_date}}</span><br>
+                        <p class="text-slate-400 mt-2 mb-0">Description : {{i.description}}  <a href="{% url 'delete_experience' i.id %}"><i class="uil uil-edit"  style="display:inline-block; float:right; "></i></a></p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+
