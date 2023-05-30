@@ -10,7 +10,7 @@ urlpatterns = [
     path('',include('pages.urls')),
 
     # Account
-    path('account/',include('account.urls')),
+    path('accounts/',include('account.urls')),
 
     # Candidate
     path('candidate/',include('candidate.urls')),
