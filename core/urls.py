@@ -10,9 +10,12 @@ urlpatterns = [
     path('',include('pages.urls')),
 
     # Account
-    path('account/',include('account.urls')),
+    path('accounts/',include('account.urls')),
 
     # Candidate
     path('candidate/',include('candidate.urls')),
+
+    # Job
+    path('job/',include('job.urls')),
 
 ] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

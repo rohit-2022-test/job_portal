@@ -1,18 +1,28 @@
-{% if messages %}
-    {% for message in messages %}
-        <div id="message" class="container">
-           <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
-            <strong>
-                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                    <strong style="color: red;">
-                        {{ message }}
-                    </strong>
-                {% else %}
-                    {{ message.tags|title }}
-                    {{ message }}
-                {% endif %}
-            </strong>
-           </div> 
-        </div>
-    {% endfor %}
-{% endif %}
+{% if messages %} {% for message in messages %}
+<div id="message" class="container">
+  <div
+    class="alert alert-{{ message.tags }} alert-dismissible text-center"
+    role="alert"
+  >
+    <strong>
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+      <strong style="color: red"> {{ message }} </strong>
+      {% else %}
+      <div
+        style="
+          background-color: white;
+          border-bottom: 1px solid black;
+          border-radius: 10px;
+          box-shadow: 2px 3px rgb(218, 211, 211);
+          margin: 15px;
+          padding: 10px;
+
+        "
+      >
+        {{ message }}
+      </div>
+      {% endif %}
+    </strong>
+  </div>
+</div>
+{% endfor %} {% endif %}

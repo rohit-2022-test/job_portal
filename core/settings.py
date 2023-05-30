@@ -20,6 +20,8 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     # Admin
+    'jazzmin',
+    'ckeditor',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -29,6 +31,7 @@ INSTALLED_APPS = [
     # Third Part App
 
     # Install App
+    
     'account.apps.AccountConfig',
     'candidate.apps.CandidateConfig',
     'job.apps.JobConfig',
