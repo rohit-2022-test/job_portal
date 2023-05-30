@@ -130,3 +130,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'joshijaya.shivinfotech@gmail.com'
 EMAIL_HOST_PASSWORD = 'nrfpbvlzvhiocxgf'
 EMAIL_USE_TLS=True
+
+LOGOUT_REDIRECT_URL = 'index'
