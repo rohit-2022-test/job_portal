@@ -19,7 +19,7 @@
                         <span class="text-slate-400 company-university">Start Data : {{i.start_date}}</span><br>
                         <span class="text-slate-400 company-university">End Data : {{i.end_date}}</span><br>
                         <span class="text-slate-400 company-university">Role : {{i.role}}</span>
-                        <p class="text-slate-400 mt-2 mb-0">Role Description : {{i.role_description}} <a href="{% url 'delete_project' i.id %}"><i class="uil uil-edit"  style="display:inline-block; float:right; "></i></a></p>
+                        <p class="text-slate-400 mt-2 mb-0">Role Description : {{i.role_description}} <a href="{% url 'delete_project' i.id %}"><i class="uil uil-file-times-alt"  style="display:inline-block; float:right; "></i></a></p>
                     </div>
                 </div>
                 {% endfor %}
@@ -39,7 +39,7 @@
                         <span class="text-slate-400 company-university">Currently working : {{i.currently_working}}</span><br>
                         <span class="text-slate-400 company-university">Start Data : {{i.start_date}}</span><br>
                         <span class="text-slate-400 company-university">End Data : {{i.end_date}}</span><br>
-                        <p class="text-slate-400 mt-2 mb-0">Description : {{i.description}} <a href="{% url 'delete_cource' i.id %}"><i class="uil uil-edit"  style="display:inline-block; float:right; "></i></a></p>
+                        <p class="text-slate-400 mt-2 mb-0">Description : {{i.description}} <a href="{% url 'delete_cource' i.id %}"><i class="uil uil-file-times-alt"  style="display:inline-block; float:right; "></i></a></p>
                     </div>
                 </div>
                 {% endfor %}

@@ -1,5 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 from job.filter import JobFilter
 from job.models import Job, JobApplicants
 from django.core.mail import send_mail
@@ -60,4 +62,7 @@ def job_apply(request):
             JobApplicants.objects.create(candidate_id=request.user,job_id=job_instance_id)
 
             return redirect(job_instance_id.applicants_collection_link_email)
+    else: 
+        return HttpResponseRedirect('signup',request.META.get('HTTP_REFERER'))  
+        
   

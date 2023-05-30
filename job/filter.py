@@ -1,7 +1,6 @@
 import django_filters
 from django import forms
 from job.models import Job
-from django.db.models import Count
 from master_table.models import Location
 from options import Experience_job_type
 
