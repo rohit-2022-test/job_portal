@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*y^ytsts09o^lw@@!2w(f7@&q92tn(3wi%n7va((!1w=u)90=$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -124,3 +125,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'joshijaya.shivinfotech@gmail.com'
 EMAIL_HOST_PASSWORD = 'nrfpbvlzvhiocxgf'
 EMAIL_USE_TLS=True
+
+LOGOUT_REDIRECT_URL = 'index'
